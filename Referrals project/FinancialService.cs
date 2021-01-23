@@ -20,15 +20,16 @@ namespace Referrals_project
 
         }
         
-        /*public static long GetBlance(long accountNumber)
+        public static long PlayerAccountBalance(long accountNumber)
         {
-            MyAccountInfo myAccountInfo;
-            if (MyBankingSystem.TryGetAccountInfo(walletID, ref myAccountInfo))
-                return (long) myAccountInfo.Balance;
-            Util.SomeLog("(GetBlance) - wallet not found for walletID: " + walletID.ToString());
+            MyAccountInfo playerAccount;
+            if (MyBankingSystem.TryGetAccountInfo(accountNumber, ref playerAccount))
+            {
+                return playerAccount.Balance;
+            }
             return 0;
         }
-        */
+        
 
         public static bool GivePlayerCredits(long accountNumber, long playerCredit)
         {
