@@ -4,9 +4,7 @@ using System.Collections.Generic;
 
 namespace Referrals_project
 {
-    public class UserXML
-    {
-        [Serializable()]
+    [Serializable()]
         [XmlRoot(ElementName = "User")]
         public class User
         {
@@ -42,7 +40,7 @@ namespace Referrals_project
         }
 
     }
-}
+
 
 
  

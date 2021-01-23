@@ -2,10 +2,7 @@
 using System.IO;
 using System.Windows.Controls;
 using NLog;
-using RestSharp.Serializers;
-using Sandbox.Game.GameSystems.BankingAndCurrency;
-using Sandbox.Game.Multiplayer;
-using Sandbox.Game.World;
+using System.Xml.Serialization;
 using Torch;
 using Torch.API;
 using Torch.API.Managers;
@@ -75,21 +72,21 @@ namespace Referrals_project
             _config.Save();
         }
         
-        public static UserXML.User ReferralDataFromStorage()
+        public static User ReferralDataFromStorage()
         {
-            var serializer = new XmlSerializer(typeof(UserXML.User));
+            var serializer = new XmlSerializer(typeof(User));
             using (var reader = new StreamReader(Instance.StoragePath))
             {
-                return (UserXML.User) serializer.Deserialize(reader);
+                return (User) serializer.Deserialize(reader);
             }
         }
         
-        public static UserXML.User WriteReferralDataToStorage()
+        public static void WriteReferralDataToStorage()
         {
-            var serializer = new XmlSerializer(typeof(UserXML));
+            var serializer = new XmlSerializer(typeof(User));
             using (var writer = new StreamWriter(Instance.StoragePath))
             {
-                return (UserXML.User) serializer.Serialize(writer);
+                serializer.Serialize(writer, Instance.StoragePath+"/Users.data");
             }
         }
 
