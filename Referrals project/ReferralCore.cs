@@ -126,7 +126,9 @@ namespace Referrals_project
                 userData.Users.Add(user);
             }
 
-            using (var writer = new StreamWriter(Path.Combine(Instance.StoragePath, "Users.data")))
+
+            using (var writer =
+                new StreamWriter(File.Open(Path.Combine(Instance.StoragePath, "Users.data"), FileMode.Append)))
             {
                 serializer.Serialize(writer, userData);
             }
