@@ -101,7 +101,7 @@ namespace Referrals_project
 
             return new User()
             {
-                Name = Sync.Players.TryGetIdentityNameFromSteamId(steamId),
+                Name = Sync.Players.TryGetIdentityNameFromSteamId(steamId)?? "Unknown User",
                 ReferralByUser = null,
                 ReferralByCode = null,
                 SteamId = steamId,
