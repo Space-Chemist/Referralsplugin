@@ -8,6 +8,7 @@ namespace Referrals_project
 {
     public class FinancialService
     {
+        public MyAccountInfo playerAccount;
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
         
         public void PlayerId(MyPlayer player)
@@ -67,4 +68,5 @@ namespace Referrals_project
             return false;
         }
     }
+
 }
