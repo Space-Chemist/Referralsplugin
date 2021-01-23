@@ -36,9 +36,9 @@ namespace Referrals_project
         {
             long identityId = Sync.Players.TryGetIdentityId(steamId, 0);
             if (identityId == 0)
-                this.Context.Respond("Fuck", (string) null, (string) null);
+                this.Context.Respond("Fuck"+ Sync.Players.TryGetIdentityNameFromSteamId(steamId).ToString());
             else if (FinancialService.GivePlayerCredits(identityId, amount))
-                this.Context.Respond("test worked money added fuck yeah");
+                this.Context.Respond("test worked money added fuck yeah" + Sync.Players.TryGetIdentityNameFromSteamId(steamId));
            
         }
         

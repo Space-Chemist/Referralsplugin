@@ -152,5 +152,12 @@ namespace Referrals_project
         {
             _config.Save();
         }
+        
+        public override void Dispose()
+        {
+            if (SessionManager != null)
+                 SessionManager.SessionStateChanged -= SessionManagerOnSessionStateChanged;
+            SessionManager = null;
+        }
     }
 }
