@@ -5,10 +5,10 @@ using System.Collections.Generic;
 namespace Referrals_project
 {
     [Serializable()]
-        [XmlRoot(ElementName = "Users")]
-        public class Users
+        [XmlRoot(ElementName = "UserData")]
+        public class UserData
         {
-            [XmlElement("User")] public List<User> User { get; set; }
+            [XmlElement("Users")] public List<User> Users { get; set; }
         }
         
         [Serializable()]

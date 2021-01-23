@@ -72,18 +72,18 @@ namespace Referrals_project
             _config.Save();
         }
         
-        public static User ReferralDataFromStorage()
+        public static UserData ReferralDataFromStorage()
         {
-            var serializer = new XmlSerializer(typeof(User));
+            var serializer = new XmlSerializer(typeof(UserData));
             using (var reader = new StreamReader(Instance.StoragePath))
             {
-                return (User) serializer.Deserialize(reader);
+                return (UserData) serializer.Deserialize(reader);
             }
         }
         
         public static void WriteReferralDataToStorage()
         {
-            var serializer = new XmlSerializer(typeof(User));
+            var serializer = new XmlSerializer(typeof(UserData));
             using (var writer = new StreamWriter(Instance.StoragePath))
             {
                 serializer.Serialize(writer, Instance.StoragePath+"/Users.data");
