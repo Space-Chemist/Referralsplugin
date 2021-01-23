@@ -5,24 +5,18 @@ using System.Collections.Generic;
 namespace Referrals_project
 {
     [Serializable()]
+        [XmlRoot(ElementName = "Users")]
+        public class Users
+        {
+            [XmlElement("User")] public List<User> User { get; set; }
+        }
+        
+        [Serializable()]
         [XmlRoot(ElementName = "User")]
         public class User
         {
-            [XmlElement("ReferralData")] public List<ReferralData> ReferralData { get; set; }
-        }
-
-        [Serializable()]
-        [XmlRoot(ElementName = "ReferralData")]
-        public class ReferralData
-        {
-            [XmlElement] public string name { get; set; }
-            [XmlElement] public List<ReferralDescriptions> ReferralDescriptions { get; set; }
-        }
-
-        [Serializable()]
-        [XmlRoot(ElementName = "ReferralDescription")]
-        public class ReferralDescriptions
-        {
+            [XmlElement] public string Name { get; set; }
+            [XmlElement] public long Id { get; set; }
             [XmlElement] public bool ReferralByUser { get; set; }
             [XmlElement] public bool ReferralByCode { get; set; }
             [XmlElement] public long SteamId { get; set; }
@@ -35,8 +29,8 @@ namespace Referrals_project
         [XmlRoot(ElementName = "ReferredDescriptions")]
         public class ReferredDescriptions
         {
-            [XmlElement] public string Referredname { get; set; }
-            [XmlElement] public bool ReferredUser { get; set; }
+            [XmlElement] public string ReferredUserName { get; set; }
+            [XmlElement] public bool ReferredUserId { get; set; }
         }
 
     }
