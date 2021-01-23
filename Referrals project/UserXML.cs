@@ -8,7 +8,7 @@ namespace Referrals_project
         [XmlRoot(ElementName = "UserData")]
         public class UserData
         {
-            [XmlElement("Users")] public List<User> Users { get; set; }
+            [XmlAttribute("Users")] public List<User> Users { get; set; }
         }
         
         [Serializable()]
