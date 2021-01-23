@@ -91,7 +91,7 @@ namespace Referrals_project
             }
         }
 
-        public User GetUser(ulong steamId)
+        public static User GetUser(ulong steamId)
         {
             var userData = UserDataFromStorage().Users;
             if (userData.Any(user => user.SteamId == steamId))

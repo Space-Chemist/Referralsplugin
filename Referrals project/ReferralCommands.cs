@@ -1,4 +1,6 @@
-﻿using NLog;
+﻿using KothPlugin;
+using Nest;
+using NLog;
 using Sandbox.Game.Multiplayer;
 using Torch.Commands;
 using Torch.Commands.Permissions;
@@ -44,8 +46,10 @@ namespace Referrals_project
         [Permission(MyPromoteLevel.None)]
         public void yes()
         {
-            Context.Respond("response string");
-            Context.Respond(Context.Player.Identity.IdentityId.ToString() + FinancialService.GivePlayerCredits(Context.Player.Identity.IdentityId, 500000L));
+            var u = ReferralCore.GetUser(76561198992724985L);
+            u.ReferralCode = "fucking yes";
+            ReferralCore.SaveUser(u);
+            Context.Respond("Check your data bro");
         }
     }
 }
