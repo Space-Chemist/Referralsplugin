@@ -8,6 +8,7 @@ namespace Referrals_project
 {
     public class FinancialService
     {
+        public MyAccountInfo playerAccount;
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
         private static MyBankingSystem bank = new MyBankingSystem();
         
@@ -64,4 +65,5 @@ namespace Referrals_project
             return false;
         }
     }
+
 }
