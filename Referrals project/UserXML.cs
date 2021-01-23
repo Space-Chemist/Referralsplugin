@@ -16,10 +16,10 @@ namespace Referrals_project
         public class User
         {
             [XmlElement] public string Name { get; set; }
-            [XmlElement] public bool ReferralByUser { get; set; }
-            [XmlElement] public bool ReferralByCode { get; set; }
-            [XmlElement] public long SteamId { get; set; }
-            [XmlElement] public long ReferredBy{ get; set; }
+            [XmlElement] public bool? ReferralByUser { get; set; }
+            [XmlElement] public bool? ReferralByCode { get; set; }
+            [XmlElement] public ulong SteamId { get; set; }
+            [XmlElement] public ulong? ReferredBy{ get; set; }
             [XmlElement] public string ReferralCode { get; set; }
             [XmlElement] public List<ReferredDescriptions> ReferredDescriptions { get; set; }
         }
@@ -29,7 +29,7 @@ namespace Referrals_project
         public class ReferredDescriptions
         {
             [XmlElement] public string ReferredUserName { get; set; }
-            [XmlElement] public bool ReferredUserId { get; set; }
+            [XmlElement] public ulong ReferredUserId { get; set; }
         }
 
     }
