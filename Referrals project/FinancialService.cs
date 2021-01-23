@@ -9,6 +9,7 @@ namespace Referrals_project
     public class FinancialService
     {
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static MyBankingSystem bank = new MyBankingSystem();
         
         public void PlayerId(MyPlayer player)
         {
@@ -22,12 +23,8 @@ namespace Referrals_project
         
         public static long PlayerAccountBalance(long accountNumber)
         {
-            MyAccountInfo playerAccount;
-            if (MyBankingSystem.TryGetAccountInfo(accountNumber, ref playerAccount))
-            {
-                return playerAccount.Balance;
-            }
-            return 0;
+            MyAccountInfo account;
+            return bank.TryGetAccountInfo(accountNumber, out account) ? account.Balance : 0;
         }
         
 
@@ -38,7 +35,7 @@ namespace Referrals_project
             {
                 // confusionnnnnnnnnnnn
                 MyAccountInfo playerAccount;
-                if (MyBankingSystem.TryGetAccountInfo(accountNumber, ref playerAccount))
+                if (bank.TryGetAccountInfo(accountNumber, out playerAccount))
                 {
                     if (playerCredit > 0)
                     {
