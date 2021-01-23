@@ -16,7 +16,6 @@ namespace Referrals_project
         public class User
         {
             [XmlElement] public string Name { get; set; }
-            [XmlElement] public long Id { get; set; }
             [XmlElement] public bool ReferralByUser { get; set; }
             [XmlElement] public bool ReferralByCode { get; set; }
             [XmlElement] public long SteamId { get; set; }
