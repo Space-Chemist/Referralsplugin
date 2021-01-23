@@ -101,7 +101,7 @@ namespace Referrals_project
 
             return new User()
             {
-                Name = Sync.Players.TryGetIdentityNameFromSteamId(steamId)?? "Unknown User",
+                Name = Sync.Players.TryGetIdentityNameFromSteamId(steamId) ?? "Unknown User",
                 ReferralByUser = null,
                 ReferralByCode = null,
                 SteamId = steamId,
@@ -109,28 +109,29 @@ namespace Referrals_project
                 ReferralCode = null
             };
         }
-        
-        
+
+
         public static void SaveUser(User user)
         {
             var serializer = new XmlSerializer(typeof(UserData));
             var userData = UserDataFromStorage();
-            var u = userData.Users.FirstOrDefault(x => x.SteamId == user.SteamId);
-            if (u != null)
+            var check = userData.Users.Any(x => x.SteamId == user.SteamId);
+            if (check)
             {
-                u = user;
+                int index = userData.Users.FindIndex(u => u.SteamId == user.SteamId);
+                userData.Users[index] = user;
             }
             else
             {
                 userData.Users.Add(user);
             }
-            
+
             using (var writer = new StreamWriter(Instance.StoragePath + "/Users.data"))
             {
                 serializer.Serialize(writer, userData);
             }
         }
-        
+
 
         public void Save()
         {
