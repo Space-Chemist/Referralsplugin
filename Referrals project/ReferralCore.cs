@@ -39,6 +39,13 @@ namespace Referrals_project
             if (!File.Exists(UserDataPath))
             {
                 File.Create(UserDataPath);
+                var serializer = new XmlSerializer(typeof(UserData));
+                var userData = new UserData();
+                using (var writer =
+                    new StreamWriter(UserDataPath))
+                {
+                    serializer.Serialize(writer, userData);
+                }
             }
         }
 
