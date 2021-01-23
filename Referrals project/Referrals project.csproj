@@ -324,9 +324,7 @@
     <Compile Include="ReferralCommands.cs" />
     <Compile Include="ReferralConfig.cs" />
     <Compile Include="ReferralCore.cs" />
-    <Compile Include="ReferredListData.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserReferralDescription.cs" />
+    <Compile Include="UserXML.cs" />
     <Page Include="ReferralContorls.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

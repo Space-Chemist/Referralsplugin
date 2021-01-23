@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Controls;
 using NLog;
+using RestSharp.Serializers;
 using Sandbox.Game.GameSystems.BankingAndCurrency;
 using Sandbox.Game.Multiplayer;
 using Sandbox.Game.World;
@@ -72,6 +73,24 @@ namespace Referrals_project
             Log.Info("Creating Default Config");
             _config = new Persistent<ReferralConfig>(configFile, new ReferralConfig());
             _config.Save();
+        }
+        
+        public static UserXML.User ReferralDataFromStorage()
+        {
+            var serializer = new XmlSerializer(typeof(UserXML.User));
+            using (var reader = new StreamReader(Instance.StoragePath))
+            {
+                return (UserXML.User) serializer.Deserialize(reader);
+            }
+        }
+        
+        public static UserXML.User WriteReferralDataToStorage()
+        {
+            var serializer = new XmlSerializer(typeof(UserXML));
+            using (var writer = new StreamWriter(Instance.StoragePath))
+            {
+                return (UserXML.User) serializer.Serialize(writer);
+            }
         }
 
         public void Save()
