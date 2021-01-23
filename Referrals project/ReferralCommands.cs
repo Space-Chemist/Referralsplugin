@@ -48,6 +48,7 @@ namespace Referrals_project
         {
             var u = ReferralCore.GetUser(76561198992724985L);
             u.ReferralCode = "fucking yes";
+            u.ReferralByUser = true;
             ReferralCore.SaveUser(u);
             Context.Respond("Check your data bro");
         }

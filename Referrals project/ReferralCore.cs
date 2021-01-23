@@ -118,7 +118,7 @@ namespace Referrals_project
             var check = userData.Users.Any(x => x.SteamId == user.SteamId);
             if (check)
             {
-                int index = userData.Users.FindIndex(u => u.SteamId == user.SteamId);
+                var index = userData.Users.FindIndex(u => u.SteamId == user.SteamId);
                 userData.Users[index] = user;
             }
             else
