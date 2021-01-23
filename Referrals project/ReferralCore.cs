@@ -109,6 +109,19 @@ namespace Referrals_project
                 ReferralCode = null
             };
         }
+        
+        
+        public static void SaveUser(User user)
+        {
+            var serializer = new XmlSerializer(typeof(User));
+            var userData = UserDataFromStorage();
+            userData.Users.Add(user);
+            using (var writer = new StreamWriter(Instance.StoragePath + "/Users.data"))
+            {
+                serializer.Serialize(writer, userData);
+            }
+        }
+        
 
         public void Save()
         {
