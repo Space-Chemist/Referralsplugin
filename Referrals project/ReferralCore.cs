@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Controls;
@@ -40,7 +41,7 @@ namespace Referrals_project
             {
                 File.Create(UserDataPath);
                 var serializer = new XmlSerializer(typeof(UserData));
-                var userData = new UserData();
+                var userData = new UserData { Users = new List<User>()};
                 using (var writer =
                     new StreamWriter(UserDataPath))
                 {
