@@ -137,7 +137,8 @@ namespace Referrals_project
             User.Add(new Users(){ReferralCode = null});
             User.Add(new Users(){ReferralByCode = null});
             User.Add(new Users(){SteamId = 10001100});
-            
+
+
             //ToDo add list to User for ReferredDescriptions
             
             
