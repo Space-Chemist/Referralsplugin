@@ -113,9 +113,18 @@ namespace Referrals_project
         
         public static void SaveUser(User user)
         {
-            var serializer = new XmlSerializer(typeof(User));
+            var serializer = new XmlSerializer(typeof(UserData));
             var userData = UserDataFromStorage();
-            userData.Users.Add(user);
+            var u = userData.Users.FirstOrDefault(x => x.SteamId == user.SteamId);
+            if (u != null)
+            {
+                u = user;
+            }
+            else
+            {
+                userData.Users.Add(user);
+            }
+            
             using (var writer = new StreamWriter(Instance.StoragePath + "/Users.data"))
             {
                 serializer.Serialize(writer, userData);
