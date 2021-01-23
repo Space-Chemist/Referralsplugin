@@ -129,7 +129,7 @@ namespace Referrals_project
         public static void SaveUser(Users user)
         {
             List<Users> User = new List<Users>();
-            XmlSerializer searial = new XmlSerializer(typeof(List<Users>));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Users>));
             var check = User.Any(x => x.SteamId == user.SteamId);
             
             User.Add(new Users(){Name = Sync.Players.TryGetIdentityNameFromSteamId(10001100)});
@@ -144,7 +144,7 @@ namespace Referrals_project
             
             using (FileStream fs = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
-                searial.Serialize(fs, User);
+                serializer.Serialize(fs, User);
             }    
             //var userData = UserDataFromStorage();
             //var check = userData.Users.Any(x => x.SteamId == user.SteamId);
@@ -169,11 +169,11 @@ namespace Referrals_project
         public void ReadUser(Users user)
         {
             List<Users> User = new List<Users>();
-            XmlSerializer searial = new XmlSerializer(typeof(List<Users>));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Users>));
 
             using (FileStream fs = new FileStream(UserDataPath, FileMode.Open, FileAccess.Read))
             { 
-                User = searial.Deserialize(fs) as List<Users>;
+                User = serializer.Deserialize(fs) as List<Users>;
             }
             
             //User is data output 
