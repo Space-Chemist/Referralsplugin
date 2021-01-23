@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Controls;
 using NLog;
 using System.Xml.Serialization;
-using KothPlugin;
 using Sandbox.Game.Multiplayer;
 using Torch;
 using Torch.API;
@@ -20,6 +19,7 @@ namespace Referrals_project
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
         public static TorchSessionManager SessionManager;
         public static ReferralCore Instance { get; private set; }
+        public static string UserDataPath = "";
         private ReferralControls _control;
         private Persistent<ReferralConfig> _config;
         public ReferralConfig Config => _config?.Data;
@@ -35,6 +35,11 @@ namespace Referrals_project
             Instance = this;
             SessionManager = Torch.Managers.GetManager<TorchSessionManager>();
             SessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
+            UserDataPath = Path.Combine(StoragePath, "Users.xml");
+            if (!File.Exists(UserDataPath))
+            {
+                File.Create(UserDataPath);
+            }
         }
 
         private static void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)
@@ -76,7 +81,7 @@ namespace Referrals_project
         public static UserData UserDataFromStorage()
         {
             var serializer = new XmlSerializer(typeof(UserData));
-            using (var reader = new StreamReader(Instance.StoragePath))
+            using (var reader = new StreamReader(UserDataPath))
             {
                 return (UserData) serializer.Deserialize(reader);
             }
@@ -126,9 +131,9 @@ namespace Referrals_project
                 userData.Users.Add(user);
             }
 
-            var path = Path.Combine(Instance.StoragePath, "Storage\\Users.xml");
+
             using (var writer =
-                new StreamWriter(File.Open(path, FileMode.Append)))
+                new StreamWriter(UserDataPath))
             {
                 serializer.Serialize(writer, userData);
             }
