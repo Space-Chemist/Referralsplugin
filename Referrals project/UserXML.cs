@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*﻿using System;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 
@@ -32,7 +32,7 @@ namespace Referrals_project
             [XmlElement] public ulong ReferredUserId { get; set; }
         }
 
-    }
+    }*/
 
 
 

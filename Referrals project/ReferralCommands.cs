@@ -46,11 +46,11 @@ namespace Referrals_project
         [Permission(MyPromoteLevel.None)]
         public void yes()
         {
-            var u = ReferralCore.GetUser(76561198992724985L);
+            /*var u = ReferralCore.GetUser(76561198992724985L);
             u.ReferralCode = "fucking yes";
             u.ReferralByUser = true;
             ReferralCore.SaveUser(u);
-            Context.Respond("Check your data bro");
+            Context.Respond("Check your data bro");*/
         }
     }
 }

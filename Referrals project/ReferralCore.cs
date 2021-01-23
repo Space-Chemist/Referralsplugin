@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using NLog;
 using System.Xml.Serialization;
 using Sandbox.Game.Multiplayer;
+using SteamKit2.GC.Dota.Internal;
 using Torch;
 using Torch.API;
 using Torch.API.Managers;
@@ -37,17 +39,17 @@ namespace Referrals_project
             SessionManager = Torch.Managers.GetManager<TorchSessionManager>();
             SessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
             UserDataPath = Path.Combine(StoragePath, "Users.xml");
-            if (!File.Exists(UserDataPath))
+            /*if (!File.Exists(UserDataPath))
             {
                 File.Create(UserDataPath);
                 var serializer = new XmlSerializer(typeof(UserData));
-                var userData = new UserData { Users = new List<User>()};
+                var userData = new UserData { Users = new List<CMsgDOTAFrostivusTimeElapsed.User>()};
                 using (var writer =
                     new StreamWriter(UserDataPath))
                 {
                     serializer.Serialize(writer, userData);
                 }
-            }
+            }*/
         }
 
         private static void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)
@@ -86,33 +88,33 @@ namespace Referrals_project
             _config.Save();
         }
 
-        public static UserData UserDataFromStorage()
+        /*public static UserData UserDataFromStorage()
         {
             var serializer = new XmlSerializer(typeof(UserData));
             using (var reader = new StreamReader(UserDataPath))
             {
                 return (UserData) serializer.Deserialize(reader);
             }
-        }
+        }*/
 
-        public static void WriteReferralDataToStorage()
+        /*public static void WriteReferralDataToStorage()
         {
             var serializer = new XmlSerializer(typeof(UserData));
             using (var writer = new StreamWriter(Instance.StoragePath))
             {
                 serializer.Serialize(writer, Instance.StoragePath + "/Users.data");
             }
-        }
+        }*/
 
-        public static User GetUser(ulong steamId)
+        /*public static Users GetUser(ulong steamId)
         {
-            var userData = UserDataFromStorage().Users;
+            var userData = ReadUser().User;
             if (userData.Any(user => user.SteamId == steamId))
             {
                 return userData.Find(user => user.SteamId == steamId);
             }
 
-            return new User()
+            return new Users()
             {
                 Name = Sync.Players.TryGetIdentityNameFromSteamId(steamId) ?? "Unknown User",
                 ReferralByUser = null,
@@ -121,30 +123,59 @@ namespace Referrals_project
                 ReferredBy = null,
                 ReferralCode = null
             };
-        }
+        }*/
 
 
-        public static void SaveUser(User user)
+        public static void SaveUser(Users user)
         {
-            var serializer = new XmlSerializer(typeof(UserData));
-            var userData = UserDataFromStorage();
-            var check = userData.Users.Any(x => x.SteamId == user.SteamId);
-            if (check)
+            List<Users> User = new List<Users>();
+            XmlSerializer searial = new XmlSerializer(typeof(List<Users>));
+            var check = User.Any(x => x.SteamId == user.SteamId);
+            
+            User.Add(new Users(){Name = Sync.Players.TryGetIdentityNameFromSteamId(10001100)});
+            User.Add(new Users(){ReferralByUser = true});
+            User.Add(new Users(){ReferralCode = null});
+            User.Add(new Users(){ReferralByCode = null});
+            User.Add(new Users(){SteamId = 10001100});
+            
+            //ToDo add list to User for ReferredDescriptions
+            
+            
+            using (FileStream fs = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
-                var index = userData.Users.FindIndex(u => u.SteamId == user.SteamId);
-                userData.Users[index] = user;
+                searial.Serialize(fs, User);
+            }    
+            //var userData = UserDataFromStorage();
+            //var check = userData.Users.Any(x => x.SteamId == user.SteamId);
+            /*if (check)
+            {
+                var index = User.FindIndex(u => u.SteamId == user.SteamId);
+                User[index] = user;
             }
             else
             {
-                userData.Users.Add(user);
+                User.Add(user);
             }
 
 
             using (var writer =
                 new StreamWriter(UserDataPath))
             {
-                serializer.Serialize(writer, userData);
+                searial.Serialize(writer, userData);
+            }*/
+        }
+
+        public void ReadUser(Users user)
+        {
+            List<Users> User = new List<Users>();
+            XmlSerializer searial = new XmlSerializer(typeof(List<Users>));
+
+            using (FileStream fs = new FileStream(UserDataPath, FileMode.Open, FileAccess.Read))
+            { 
+                User = searial.Deserialize(fs) as List<Users>;
             }
+            
+            //User is data output 
         }
 
 
