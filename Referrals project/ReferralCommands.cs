@@ -1,4 +1,5 @@
 ﻿using NLog;
+using Sandbox.Game.Multiplayer;
 using Torch.Commands;
 using Torch.Commands.Permissions;
 using VRage.Game.ModAPI;
@@ -24,6 +25,18 @@ namespace Referrals_project
         {
             this.Context.Respond("response string");
                 
+        }
+        
+        [Command("Test", "Adds money to player. Needed SteamID.", null)]
+        [Permission(MyPromoteLevel.None)]
+        public void GiveCredits(ulong steamId, long amount)
+        {
+            long identityId = Sync.Players.TryGetIdentityId(steamId, 0);
+            if (identityId == 0L)
+                this.Context.Respond("Fuck", (string) null, (string) null);
+            else if (FinancialService.GivePlayerCredits(identityId, amount))
+                this.Context.Respond("test worked money added fuck yeah");
+           
         }
     }
 }

@@ -2,6 +2,9 @@
 using System.IO;
 using System.Windows.Controls;
 using NLog;
+using Sandbox.Game.GameSystems.BankingAndCurrency;
+using Sandbox.Game.Multiplayer;
+using Sandbox.Game.World;
 using Torch;
 using Torch.API;
 using Torch.API.Managers;
@@ -70,7 +73,7 @@ namespace Referrals_project
             _config = new Persistent<ReferralConfig>(configFile, new ReferralConfig());
             _config.Save();
         }
-        
+
         public void Save()
         {
             _config.Save();
