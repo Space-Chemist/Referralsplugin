@@ -126,9 +126,9 @@ namespace Referrals_project
                 userData.Users.Add(user);
             }
 
-
+            var path = Path.Combine(Instance.StoragePath, "Storage\\Users.xml");
             using (var writer =
-                new StreamWriter(File.Open(Path.Combine(Instance.StoragePath, "Users.data"), FileMode.Append)))
+                new StreamWriter(File.Open(path, FileMode.Append)))
             {
                 serializer.Serialize(writer, userData);
             }
