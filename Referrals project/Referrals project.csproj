@@ -38,8 +38,80 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DirectShowLib, Version=2.1.0.1599, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\DirectShowLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Discord.Net.Commands, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\Discord.Net.Commands.dll</HintPath>
+    </Reference>
+    <Reference Include="Discord.Net.Core, Version=2.3.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\Discord.Net.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Discord.Net.Rest, Version=2.3.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\Discord.Net.Rest.dll</HintPath>
+    </Reference>
+    <Reference Include="Discord.Net.Webhook, Version=2.3.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\Discord.Net.Webhook.dll</HintPath>
+    </Reference>
+    <Reference Include="Discord.Net.WebSocket, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\Discord.Net.WebSocket.dll</HintPath>
+    </Reference>
+    <Reference Include="Elasticsearch.Net, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d">
+      <HintPath>bin\Debug\Elasticsearch.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="EmptyKeys.UserInterface, Version=3.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\EmptyKeys.UserInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="EmptyKeys.UserInterface.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\EmptyKeys.UserInterface.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EmptyKeys.UserInterface.Debug, Version=3.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\EmptyKeys.UserInterface.Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="GameAnalytics.Mono, Version=1.0.6997.21819, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\GameAnalytics.Mono.dll</HintPath>
+    </Reference>
+    <Reference Include="HavokWrapper, Version=0.1.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\HavokWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="KothPlugin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\KothPlugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis, Version=2.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>bin\Debug\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=2.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>bin\Debug\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>bin\Debug\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Nest, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d">
+      <HintPath>bin\Debug\Nest.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c">
       <HintPath>..\..\..\..\..\..\..\Torch\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67">
+      <HintPath>bin\Debug\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="ProtoBuf.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\ProtoBuf.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ProtoBuf.Net.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\ProtoBuf.Net.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="RecastDetourWrapper, Version=0.1.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\RecastDetourWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.11.8.0, Culture=neutral, PublicKeyToken=598062e77f915f75">
+      <HintPath>bin\Debug\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\..\..\..\Torch\DedicatedServer64\Sandbox.Common.dll</HintPath>
@@ -47,11 +119,107 @@
     <Reference Include="Sandbox.Game, Version=0.1.1.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\..\..\..\Torch\DedicatedServer64\Sandbox.Game.dll</HintPath>
     </Reference>
+    <Reference Include="Sandbox.Game.XmlSerializers, Version=0.1.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\Sandbox.Game.XmlSerializers.dll</HintPath>
+    </Reference>
     <Reference Include="Sandbox.Graphics, Version=0.1.1.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\..\..\..\Torch\DedicatedServer64\Sandbox.Graphics.dll</HintPath>
     </Reference>
+    <Reference Include="Sandbox.RenderDirect, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\Sandbox.RenderDirect.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1">
+      <HintPath>bin\Debug\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.D3DCompiler, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1">
+      <HintPath>bin\Debug\SharpDX.D3DCompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Desktop, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1">
+      <HintPath>bin\Debug\SharpDX.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1">
+      <HintPath>bin\Debug\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DirectInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1">
+      <HintPath>bin\Debug\SharpDX.DirectInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1">
+      <HintPath>bin\Debug\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XAudio2, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1">
+      <HintPath>bin\Debug\SharpDX.XAudio2.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1">
+      <HintPath>bin\Debug\SharpDX.XInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\SixLabors.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.ImageSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\SixLabors.ImageSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers.Game, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\SpaceEngineers.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers.ObjectBuilders, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\SpaceEngineers.ObjectBuilders.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers.ObjectBuilders.XmlSerializers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\SpaceEngineers.ObjectBuilders.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="SteamKit2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\SteamKit2.dll</HintPath>
+    </Reference>
+    <Reference Include="Steamworks.NET, Version=13.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\Steamworks.NET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>bin\Debug\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>bin\Debug\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.102.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139">
+      <HintPath>bin\Debug\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>bin\Debug\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Interactive.Async, Version=4.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263">
+      <HintPath>bin\Debug\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Async, Version=4.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263">
+      <HintPath>bin\Debug\System.Linq.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>bin\Debug\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>bin\Debug\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>bin\Debug\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>bin\Debug\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>bin\Debug\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=1.4.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>bin\Debug\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>bin\Debug\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>bin\Debug\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Common, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>bin\Debug\System.Web.Http.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,17 +229,80 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Torch, Version=1.3.1.138, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\Torch.dll</HintPath>
+    </Reference>
     <Reference Include="Torch, Version=1.3.1.139, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\..\..\..\Torch\Torch.dll</HintPath>
+    </Reference>
+    <Reference Include="Torch.API, Version=1.3.1.138, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\Torch.API.dll</HintPath>
     </Reference>
     <Reference Include="Torch.API, Version=1.3.1.139, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\..\..\..\Torch\Torch.API.dll</HintPath>
     </Reference>
+    <Reference Include="Torch.Server, Version=1.3.1.138, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\Torch.Server.exe</HintPath>
+    </Reference>
+    <Reference Include="VRage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Ansel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Ansel.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Audio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Dedicated, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Dedicated.dll</HintPath>
+    </Reference>
     <Reference Include="VRage.Game, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\..\..\..\Torch\DedicatedServer64\VRage.Game.dll</HintPath>
     </Reference>
+    <Reference Include="VRage.Game.XmlSerializers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Game.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Input, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Library.dll</HintPath>
+    </Reference>
     <Reference Include="VRage.Math, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\..\..\..\Torch\DedicatedServer64\VRage.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Math.XmlSerializers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Math.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.NativeAftermath, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.NativeAftermath.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.NativeWrapper, Version=0.1.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.NativeWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Network, Version=1.0.53.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Platform.Windows, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Platform.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.RemoteClient.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.RemoteClient.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Render, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Render.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Render11, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Render11.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Scripting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.UserInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.UserInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.XmlSerializers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\Debug\VRage.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />

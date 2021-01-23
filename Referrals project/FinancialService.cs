@@ -8,19 +8,8 @@ namespace Referrals_project
 {
     public class FinancialService
     {
-        public MyAccountInfo playerAccount;
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
-        private static MyBankingSystem bank = new MyBankingSystem();
-        
-        public void PlayerId(MyPlayer player)
-        {
-            long playerId = player.Identity.IdentityId;
-            var id = player.Client.SteamUserId;
-            if (id <= 0)
-                return;
-            string name = player.Identity?.DisplayName ?? "player";
-
-        }
+        private static MyBankingSystem bank = MyBankingSystem.Static;
         
         public static long PlayerAccountBalance(long accountNumber)
         {
@@ -34,7 +23,6 @@ namespace Referrals_project
             
             try
             {
-                // confusionnnnnnnnnnnn
                 MyAccountInfo playerAccount;
                 if (bank.TryGetAccountInfo(accountNumber, out playerAccount))
                 {
