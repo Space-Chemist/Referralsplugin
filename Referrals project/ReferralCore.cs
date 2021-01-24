@@ -38,10 +38,9 @@ namespace Referrals_project
             Instance = this;
             SessionManager = Torch.Managers.GetManager<TorchSessionManager>();
             SessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
-            UserDataPath = Path.Combine(StoragePath, "Users.Data");
+            UserDataPath = Path.Combine(StoragePath, "Users.xml");
             if (!File.Exists(UserDataPath))
             {
-                File.Create(UserDataPath);
                 var serializer = new XmlSerializer(typeof(UserData));
                 var userData = new UserData { Users = new List<User>()};
                 using (var fileWriter = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
