@@ -44,7 +44,7 @@ namespace Referrals_project
                 File.Create(UserDataPath);
                 var serializer = new XmlSerializer(typeof(UserData));
                 var userData = new UserData { Users = new List<User>()};
-                using (var fileWriter = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                using (var fileWriter = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
                 {
                     serializer.Serialize(fileWriter, userData);
                 }
@@ -134,7 +134,7 @@ namespace Referrals_project
             }
 
 
-            using (var fileWriter = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            using (var fileWriter = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
             {
                 serializer.Serialize(fileWriter, userData);
             }
