@@ -59,12 +59,7 @@
                     <DataGridTextColumn Header="Referred By" Binding="{Binding ReferredBy}" />
                     <DataGridTextColumn Header="Referral Code" Binding="{Binding ReferralCode}"/>
                     <DataGridComboBoxColumn>
-                        <DataTemplate>
-                            <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
-                                <TextBlock  VerticalAlignment="Center" Text="Server Referral Code" Margin="5"/>
-                                <TextBox x:Name="ServerReferralCode" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding ServerReferralCode}"/>
-                            </StackPanel>
-                        </DataTemplate>
+                        
                     </DataGridComboBoxColumn>
                     <!--<DataGridComboBoxColumn Header="Referred Data" TextBinding="{Binding ReferredDescriptions}">
                         
