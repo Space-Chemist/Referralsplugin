@@ -50,20 +50,25 @@
         
         <!--Left Grid area Webserver enabled -->
         <Grid x:Name="ReferralDataGrid" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
-            <DataGrid Name = "DataGrid" AlternatingRowBackground = "Gray" AlternationCount = "2" AutoGenerateColumns = "True">
+            <DataGrid Name = "DataGrid" AlternatingRowBackground = "Gray" AlternationCount = "2" AutoGenerateColumns = "True" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Player Name"/>
-                    <DataGridTextColumn Header="Referred By Player"/>
-                    <DataGridTextColumn Header="Referred By Code"/>
-                    <DataGridTextColumn Header="Player Steam Id"/>
-                    <DataGridTextColumn Header="Referred By"/>
-                    <DataGridTextColumn Header="Referral Code"/>
-                    <DataGridComboBoxColumn Header="Referred Data">
-                        <StackPanel>
-                            <TextBlock  VerticalAlignment="Center" Text="{Binding}" Margin="5"/>
-                            <TextBlock  VerticalAlignment="Center" Text="{Binding }" Margin="5"/>
-                        </StackPanel>
+                    <DataGridTextColumn Header="Player Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Referred By Player" Binding="{Binding ReferralByUser}"/>
+                    <DataGridTextColumn Header="Referred By Code" Binding="{Binding ReferralByCode}"/>
+                    <DataGridTextColumn Header="Player Steam Id" Binding="{Binding SteamId}"/>
+                    <DataGridTextColumn Header="Referred By" Binding="{Binding ReferredBy}" />
+                    <DataGridTextColumn Header="Referral Code" Binding="{Binding ReferralCode}"/>
+                    <DataGridComboBoxColumn>
+                        <DataTemplate>
+                            <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock  VerticalAlignment="Center" Text="Server Referral Code" Margin="5"/>
+                                <TextBox x:Name="ServerReferralCode" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding ServerReferralCode}"/>
+                            </StackPanel>
+                        </DataTemplate>
                     </DataGridComboBoxColumn>
+                    <!--<DataGridComboBoxColumn Header="Referred Data" TextBinding="{Binding ReferredDescriptions}">
+                        
+                    </DataGridComboBoxColumn>-->
                 </DataGrid.Columns>
             </DataGrid>    
         </Grid>

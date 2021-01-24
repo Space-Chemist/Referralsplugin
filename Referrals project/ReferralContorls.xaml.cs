@@ -30,6 +30,7 @@ namespace Referrals_project
         public ReferralControls(ReferralCore plugin) : this() {
             Plugin = plugin;
             DataContext = plugin.Config;
+            DataContext = plugin._userdata;
         }
         
         private Referrals_project.ReferralCore Plugin { get; }

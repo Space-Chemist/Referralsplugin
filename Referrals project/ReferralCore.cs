@@ -26,6 +26,7 @@ namespace Referrals_project
         private ReferralControls _control;
         private Persistent<ReferralConfig> _config;
         public ReferralConfig Config => _config?.Data;
+        public UserData _userdata;
 
         public UserControl GetControl()
         {
