@@ -45,9 +45,11 @@ namespace Referrals_project
         [Permission(MyPromoteLevel.None)]
         public void yes()
         {
+            var rd = new ReferredDescription { ReferredUserName = "steave", ReferredUserId = 42l};
             var u = ReferralCore.GetUser(76561198992724985L);
             u.ReferralCode = "fucking no";
             u.ReferralByUser = true;
+            u.ReferredDescriptions.Add(rd);
             ReferralCore.SaveUser(u);
             Context.Respond("Check your data bro");
         }

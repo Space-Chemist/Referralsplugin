@@ -18,10 +18,10 @@ namespace Referrals_project
         public ulong SteamId { get; set; }
         public ulong? ReferredBy { get; set; }
         public string ReferralCode { get; set; }
-        public List<ReferredDescriptions> ReferredDescriptions { get; set; }
+        public List<ReferredDescription> ReferredDescriptions { get; set; }
     }
 
-    public class ReferredDescriptions
+    public class ReferredDescription
     {
         public string ReferredUserName { get; set; }
         public ulong ReferredUserId { get; set; }

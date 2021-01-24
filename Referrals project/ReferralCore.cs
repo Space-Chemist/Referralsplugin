@@ -112,7 +112,7 @@ namespace Referrals_project
                 SteamId = steamId,
                 ReferredBy = null,
                 ReferralCode = null,
-                ReferredDescriptions = new List<ReferredDescriptions>()
+                ReferredDescriptions = new List<ReferredDescription>()
             };
         }
 
@@ -138,7 +138,8 @@ namespace Referrals_project
                 serializer.Serialize(fileWriter, userData);
             }
         }
-
+        
+        
         
         public void Save()
         {
