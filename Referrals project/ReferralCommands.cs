@@ -1,5 +1,4 @@
-﻿using KothPlugin;
-using Nest;
+﻿using Nest;
 using NLog;
 using Sandbox.Game.Multiplayer;
 using Torch.Commands;
@@ -46,11 +45,11 @@ namespace Referrals_project
         [Permission(MyPromoteLevel.None)]
         public void yes()
         {
-            /*var u = ReferralCore.GetUser(76561198992724985L);
-            u.ReferralCode = "fucking yes";
+            var u = ReferralCore.GetUser(76561198992724985L);
+            u.ReferralCode = "fucking no";
             u.ReferralByUser = true;
             ReferralCore.SaveUser(u);
-            Context.Respond("Check your data bro");*/
+            Context.Respond("Check your data bro");
         }
     }
 }
