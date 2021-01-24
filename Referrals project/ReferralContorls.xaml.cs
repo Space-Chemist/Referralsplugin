@@ -33,6 +33,25 @@ namespace Referrals_project
         }
         
         private Referrals_project.ReferralCore Plugin { get; }
+        
+        private void UserReferralRewardConfigButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            //Log.Info("Test Webhook Sent");
+            //DiscordService.SendDiscordWebHook("Successful WebHook Test");
+            
+        }
+        
+        private void ServerReferralRewardConfigButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            //Log.Info("Scores Cleared");
+            //NetworkService.SendPacket("clear");
+        }
+        
+        private void PromotionCodeRewardConfigButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            //Log.Info("Config updated ");
+            Plugin.Save();
+        }
 
     }
 }

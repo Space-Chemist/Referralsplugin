@@ -5,8 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Referrals_project"
         mc:Ignorable="d">
-        
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--Main Grid Area-->
+        <TextBlock Grid.Column="0" Grid.Row ="0" VerticalAlignment="Center" Text="Referral Rewards Plugin" FontWeight="Bold" FontSize="16" Grid.ColumnSpan="2" Margin="5"/>
         
+        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Referral Rewards Enabled" Margin="5" />
+            <CheckBox x:Name="ReferralRewardsEnabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=ReferralRewardsEnabled}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+            <TextBlock  VerticalAlignment="Center" Text="Promotion Rewards Enabled" Margin="5"/>
+            <CheckBox x:Name="PromotionRewardEnabled" HorizontalAlignment="Left" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding PromotionRewardEnabled}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+            <TextBlock  VerticalAlignment="Center" Text="Referral Rewards Code" Margin="5"/>
+            <TextBox x:Name="ReferralRewardsCode" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding ReferralRewardsCode}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
+            <TextBlock  VerticalAlignment="Center" Text="Promotion Rewards Code" Margin="5"/>
+            <TextBox x:Name="PromotionRewardsCode" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding PromotionRewardsCode}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="4">
+            <Button  Content="Promotion Reward Config" Margin="5" Click="PromotionCodeRewardConfigButton_OnClick" />
+            <Button  Content="Server Referral Reward Config" Margin="5" Click="ServerReferralRewardConfigButton_OnClick" />
+            <Button  Content="User Referral Reward Config" Margin="5" Click="UserReferralRewardConfigButton_OnClick" />
+        </StackPanel>
+        
+        <!--Left Grid area Webserver enabled -->
+        <Grid x:Name="ReferralDataGrid" Grid.Column="0" Grid.Row="4">
+            <!--visibility control binded to WebServerEnalbed\\ used to collapsed WebServerGrid when not checked-->
+            <!--<Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsChecked,ElementName=CWebServerEnabled}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!--Data grid added here-->
+        </Grid>
     </Grid>
 </UserControl>
