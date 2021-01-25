@@ -6,7 +6,7 @@ namespace Referrals_project
     {
         private bool _referralrewards = true;
         private bool _promotionrewardenabled = true;
-        private string _serverreferralcode = "serverntest code";
+        private string _serverreferralcode = "server test code";
         private string _promotionrewardscode = "Promotiontestcode";
         
         public bool ReferralRewardsEnabled

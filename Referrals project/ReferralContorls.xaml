@@ -46,11 +46,62 @@
             <Button  Content="Server Referral Reward Config" Margin="5" Click="ServerReferralRewardConfigButton_OnClick" />
             <Button  Content="User Referral Reward Config" Margin="5" Click="UserReferralRewardConfigButton_OnClick" />
             <Button  Content="Promotion Reward Config" Margin="5" Click="PromotionCodeRewardConfigButton_OnClick" />
-        </StackPanel>
+        </StackPanel> 
+        
+        <Popup Name="ServerReferralRewardsConfig" Placement="Mouse" HorizontalOffset="-100" VerticalOffset="-100" AllowsTransparency="False">
+            <Grid>
+                <Border Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Padding="25">
+                    <StackPanel>
+                        <DataGrid>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Amount" Binding="{Binding RewardAmountServer}"/>
+                                <DataGridComboBoxColumn Header="TypId" SelectedItemBinding="{Binding Path=TypeIdServer}" ItemsSource="{Binding Path=OCTypeIdServer}"/>
+                                <DataGridComboBoxColumn Header="SubType Id" SelectedItemBinding="{Binding Path=SubTypeIdServer}" ItemsSource="{Binding Path=OCSubTypeIdServer}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button  Content="Close" Margin="5" Click="ServerReferralRewardConfigCloseButton_OnClick" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Popup>
+        
+        <Popup Name="UserReferralRewardsConfig" Placement="Mouse" HorizontalOffset="-100" VerticalOffset="-100" AllowsTransparency="False">
+            <Grid>
+                <Border Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Padding="25">
+                    <StackPanel>
+                        <DataGrid>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Amount" Binding="{Binding RewardAmountUser}"/>
+                                <DataGridComboBoxColumn Header="TypId" SelectedItemBinding="{Binding Path=TypeIdUser}" ItemsSource="{Binding Path=OCTypeIdUser}"/>
+                                <DataGridComboBoxColumn Header="SubType Id" SelectedItemBinding="{Binding Path=SubTypeIdUser}" ItemsSource="{Binding Path=OCSubTypeIdUser}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button  Content="Close" Margin="5" Click="UserReferralRewardConfigCloseButton_OnClick" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Popup>
+        
+        <Popup Name="PromotionCodeRewardsConfig" Placement="Mouse" HorizontalOffset="-100" VerticalOffset="-100" AllowsTransparency="False">
+            <Grid>
+                <Border Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Padding="25">
+                    <StackPanel>
+                        <DataGrid>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Amount" Binding="{Binding RewardAmountPromotion}"/>
+                                <DataGridComboBoxColumn Header="TypId" SelectedItemBinding="{Binding Path=TypeIdPromotion}" ItemsSource="{Binding Path=OCTypeIdPromotion}"/>
+                                <DataGridComboBoxColumn Header="SubType Id" SelectedItemBinding="{Binding Path=SubTypeIdPromotion}" ItemsSource="{Binding Path=OCSubTypeIdPromotion}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button  Content="Close" Margin="5" Click="PromotionCodeRewardConfigCloseButton_OnClick" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Popup>
         
         <!--Left Grid area Webserver enabled -->
         <Grid x:Name="ReferralDataGrid" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
-            <DataGrid Name = "DataGrid" AlternatingRowBackground = "LightGray"  AlternationCount = "2" AutoGenerateColumns = "True" >
+            <DataGrid x:Name ="DataGrid" AlternatingRowBackground = "LightGray"  AlternationCount = "2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Player Name" Binding="{Binding Name}"/>
                     <DataGridCheckBoxColumn Header="Referred By Player" Binding="{Binding ReferralByUser}"/>
@@ -59,7 +110,7 @@
                     <DataGridTextColumn Header="Referred By" Binding="{Binding ReferredBy}" />
                     <DataGridTextColumn Header="Referral Code" Binding="{Binding ReferralCode}"/>
                     <DataGridTemplateColumn Header=" Referred Data">
-                        <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate DataType="local:ReferredDescription">
                                 <ComboBox ItemsSource="{Binding Path=ReferredUserName}">
                                     <ComboBox.ItemTemplate>
@@ -72,7 +123,7 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
                             </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>    

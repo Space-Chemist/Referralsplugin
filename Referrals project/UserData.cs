@@ -1,16 +1,16 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿
 using System.Collections.Generic;
+using Torch;
 
 namespace Referrals_project
 {
-    public class UserData
+    public class UserData : ViewModel
     {
         public List<User> Users { get; set; }
     }
 
 
-    public class User
+    public class User : ViewModel
     {
         public string Name { get; set; }
         public bool? ReferralByUser { get; set; }
@@ -21,7 +21,7 @@ namespace Referrals_project
         public List<ReferredDescription> ReferredDescriptions { get; set; }
     }
 
-    public class ReferredDescription
+    public class ReferredDescription : ViewModel
     {
         public string ReferredUserName { get; set; }
         public ulong ReferredUserId { get; set; }

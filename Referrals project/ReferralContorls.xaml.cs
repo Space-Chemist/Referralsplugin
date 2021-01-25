@@ -30,27 +30,42 @@ namespace Referrals_project
         public ReferralControls(ReferralCore plugin) : this() {
             Plugin = plugin;
             DataContext = plugin.Config;
-            DataContext = plugin._userdata;
+            var userData = ReferralCore.UserDataFromStorage().Users;
+            DataContext = userData;
         }
         
         private Referrals_project.ReferralCore Plugin { get; }
         
-        private void UserReferralRewardConfigButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            //Log.Info("Test Webhook Sent");
-            //DiscordService.SendDiscordWebHook("Successful WebHook Test");
-            
-        }
-        
         private void ServerReferralRewardConfigButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //Log.Info("Scores Cleared");
-            //NetworkService.SendPacket("clear");
+            ServerReferralRewardsConfig.IsOpen = true;
+        }
+
+        private void ServerReferralRewardConfigCloseButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ServerReferralRewardsConfig.IsOpen = false;
+            Plugin.Save();
+        }
+        
+        private void UserReferralRewardConfigButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            UserReferralRewardsConfig.IsOpen = true;
+        }
+        
+        private void UserReferralRewardConfigCloseButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            UserReferralRewardsConfig.IsOpen = false;
+            Plugin.Save();
         }
         
         private void PromotionCodeRewardConfigButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //Log.Info("Config updated ");
+            PromotionCodeRewardsConfig.IsOpen = true;
+        }
+        
+        private void PromotionCodeRewardConfigCloseButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            PromotionCodeRewardsConfig.IsOpen = false;
             Plugin.Save();
         }
 

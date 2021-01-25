@@ -39,6 +39,7 @@ namespace Referrals_project
             Instance = this;
             SessionManager = Torch.Managers.GetManager<TorchSessionManager>();
             SessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
+            SetupConfig();
             UserDataPath = Path.Combine(StoragePath, "Users.xml");
             if (!File.Exists(UserDataPath))
             {
