@@ -50,20 +50,30 @@
         
         <!--Left Grid area Webserver enabled -->
         <Grid x:Name="ReferralDataGrid" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
-            <DataGrid Name = "DataGrid" AlternatingRowBackground = "Gray" AlternationCount = "2" AutoGenerateColumns = "True" >
+            <DataGrid Name = "DataGrid" AlternatingRowBackground = "LightGray"  AlternationCount = "2" AutoGenerateColumns = "True" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Player Name" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Referred By Player" Binding="{Binding ReferralByUser}"/>
-                    <DataGridTextColumn Header="Referred By Code" Binding="{Binding ReferralByCode}"/>
+                    <DataGridCheckBoxColumn Header="Referred By Player" Binding="{Binding ReferralByUser}"/>
+                    <DataGridCheckBoxColumn Header="Referred By Code" Binding="{Binding ReferralByCode}"/>
                     <DataGridTextColumn Header="Player Steam Id" Binding="{Binding SteamId}"/>
                     <DataGridTextColumn Header="Referred By" Binding="{Binding ReferredBy}" />
                     <DataGridTextColumn Header="Referral Code" Binding="{Binding ReferralCode}"/>
-                    <DataGridComboBoxColumn>
-                        
-                    </DataGridComboBoxColumn>
-                    <!--<DataGridComboBoxColumn Header="Referred Data" TextBinding="{Binding ReferredDescriptions}">
-                        
-                    </DataGridComboBoxColumn>-->
+                    <DataGridTemplateColumn Header=" Referred Data">
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate DataType="local:ReferredDescription">
+                                <ComboBox ItemsSource="{Binding Path=ReferredUserName}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate DataType="local:ReferredDescription">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Path=ReferredUserId}"/>
+                                                <TextBlock Text="{Binding Path=ReferredUserName}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>    
         </Grid>
