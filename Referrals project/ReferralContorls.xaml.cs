@@ -13,6 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls;
+using System.Data;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 
 
 namespace Referrals_project
@@ -22,16 +26,22 @@ namespace Referrals_project
     /// </summary>
     public partial class ReferralControls : UserControl
     {
+        //public ObservableCollection<User> UserData { get; } = new ObservableCollection<User>();
+        //public ObservableCollection<User> UserData { get; set; }
         public ReferralControls()
         {
             InitializeComponent();
+            //UserData = new ObservableCollection<User>();
         }
-        
+
+
         public ReferralControls(ReferralCore plugin) : this() {
             Plugin = plugin;
             DataContext = plugin.Config;
             var userData = ReferralCore.UserDataFromStorage().Users;
-            DataContext = userData;
+            ObservableCollection<User> userInfo = new ObservableCollection<User>(userData);
+            DataGrid.DataContext = userInfo;
+            
         }
         
         private Referrals_project.ReferralCore Plugin { get; }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Referrals_project"
         mc:Ignorable="d">
-    <Grid>
+    <Grid d:DataContext="{d:DesignInstance }">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
             <ColumnDefinition Width="Auto"/>
@@ -101,7 +101,7 @@
         
         <!--Left Grid area Webserver enabled -->
         <Grid x:Name="ReferralDataGrid" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
-            <DataGrid x:Name ="DataGrid" AlternatingRowBackground = "LightGray"  AlternationCount = "2">
+            <DataGrid x:Name ="DataGrid" ItemsSource="{Binding}" AlternatingRowBackground = "LightGray" AutoGenerateColumns="False" AlternationCount = "2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Player Name" Binding="{Binding Name}"/>
                     <DataGridCheckBoxColumn Header="Referred By Player" Binding="{Binding ReferralByUser}"/>
@@ -111,10 +111,10 @@
                     <DataGridTextColumn Header="Referral Code" Binding="{Binding ReferralCode}"/>
                     <DataGridTemplateColumn Header=" Referred Data">
                         <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate DataType="local:ReferredDescription">
-                                <ComboBox ItemsSource="{Binding Path=ReferredUserName}">
+                            <DataTemplate>
+                                <ComboBox>
                                     <ComboBox.ItemTemplate>
-                                        <DataTemplate DataType="local:ReferredDescription">
+                                        <DataTemplate>
                                             <StackPanel>
                                                 <TextBlock Text="{Binding Path=ReferredUserId}"/>
                                                 <TextBlock Text="{Binding Path=ReferredUserName}"/>
