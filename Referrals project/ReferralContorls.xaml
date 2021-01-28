@@ -103,12 +103,12 @@
         <Grid x:Name="ReferralDataGrid" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
             <DataGrid x:Name ="DataGrid" ItemsSource="{Binding}" AlternatingRowBackground = "LightGray" AutoGenerateColumns="False" AlternationCount = "2">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Player Name" Binding="{Binding Name}"/>
-                    <DataGridCheckBoxColumn Header="Referred By Player" Binding="{Binding ReferralByUser}"/>
-                    <DataGridCheckBoxColumn Header="Referred By Code" Binding="{Binding ReferralByCode}"/>
+                    <DataGridTextColumn Header="Player Name" Binding="{Binding Name, FallbackValue='Unknown User'}"/>
+                    <DataGridCheckBoxColumn Header="Referred By Player" Binding="{Binding ReferralByUser, FallbackValue='N/A'}"/>
+                    <DataGridCheckBoxColumn Header="Referred By Code" Binding="{Binding ReferralByCode, FallbackValue='N/A'}"/>
                     <DataGridTextColumn Header="Player Steam Id" Binding="{Binding SteamId}"/>
-                    <DataGridTextColumn Header="Referred By" Binding="{Binding ReferredBy}" />
-                    <DataGridTextColumn Header="Referral Code" Binding="{Binding ReferralCode}"/>
+                    <DataGridTextColumn Header="Referred By" Binding="{Binding ReferredBy, FallbackValue='N/A'}" />
+                    <DataGridTextColumn Header="Referral Code" Binding="{Binding ReferralCode, FallbackValue='N/A'}"/>
                     <DataGridTemplateColumn Header=" Referred Data">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
