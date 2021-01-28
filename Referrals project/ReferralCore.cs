@@ -143,7 +143,32 @@ namespace Referrals_project
                 serializer.Serialize(fileWriter, userData);
             }
         }
+
+
+        public static bool Dostuff(User user)
+        {
+            return true;
+        }
         
+        //full credit to https://github.com/TorchAPI/Essentials/blob/415a7e12809c75fc1efcfbc878cfee1730efa6ff/Essentials/Utilities.cs#L56
+        public static IMyIdentity GetIdentityByNameOrIds(string playerNameOrIds) 
+        {
+            foreach (var identity in MySession.Static.Players.GetAllIdentities()) 
+            {
+                if (identity.DisplayName == playerNameOrIds)
+                    return identity;
+
+                if (long.TryParse(playerNameOrIds, out var identityId)) 
+                    if (identity.IdentityId == identityId)
+                        return identity;
+
+                if (!ulong.TryParse(playerNameOrIds, out var steamId)) continue;
+                var id = MySession.Static.Players.TryGetSteamId(identity.IdentityId);
+                if (id == steamId)
+                    return identity;
+            }
+            return null;
+        }
         
         
         public void Save()

@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Torch;
 
 namespace Referrals_project
@@ -25,5 +24,7 @@ namespace Referrals_project
     {
         public string ReferredUserName { get; set; }
         public ulong ReferredUserId { get; set; }
+
+        public bool Claimed { get; set; }
     }
 }

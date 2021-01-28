@@ -1,6 +1,8 @@
-﻿using Nest;
+﻿using System.Linq;
+using Nest;
 using NLog;
 using Sandbox.Game.Multiplayer;
+using Sandbox.Game.World;
 using Torch.Commands;
 using Torch.Commands.Permissions;
 using VRage.Game.ModAPI;
@@ -14,44 +16,102 @@ namespace Referrals_project
 
         public Referrals_project.ReferralCore Plugin
         {
-            get
+            get { return (Referrals_project.ReferralCore) this.Context.Plugin; }
+        }
+
+
+        [Command("new", "get your referral bonus", "requries steamId/Name")]
+        [Permission(MyPromoteLevel.None)]
+        public void Knew(string player)
+        {
+            if (Context.Player == null)
             {
-                return (Referrals_project.ReferralCore)this.Context.Plugin;
+                Log.Error("Why are you running this in the console?");
+                return;
             }
+
+            var identity = ReferralCore.GetIdentityByNameOrIds(player);
+            if (identity == null)
+            {
+                Context.Respond("X: player not found, are you sure you have the right steam id or name?");
+                return;
+            }
+
+            var user1 = ReferralCore.GetUser(Context.Player.SteamUserId);
+
+            if (user1.ReferralByUser != null)
+            {
+                if ((bool) user1.ReferralByUser)
+                {
+                    Context.Respond("X: You already did this?");
+                    return;
+                }
+            }
+
+            if (user1.ReferralByCode != null)
+            {
+                if ((bool) user1.ReferralByCode)
+                {
+                    Context.Respond("X: You already did this?");
+                    return;
+                }
+            }
+
+            var user2 = ReferralCore.GetUser(MySession.Static.Players.TryGetSteamId(identity.IdentityId));
+
+            var check = ReferralCore.Dostuff(user1);
+            if (!check)
+            {
+                Log.Error("Failed to do stuff");
+                Context.Respond("X: Failed to do stuff");
+                return;
+            }
+
+            var referredDescription = new ReferredDescription
+                {ReferredUserName = user1.Name, ReferredUserId = user1.SteamId, Claimed = false};
+            user1.ReferralByUser = true;
+            user1.ReferredBy = user2.SteamId;
+            user2.ReferredDescriptions.Add(referredDescription);
+
+            ReferralCore.SaveUser(user1);
+            ReferralCore.SaveUser(user1);
+            Context.Respond("Claimed");
         }
 
-        [Command("Examlpe command", "Example Description", "help text")]
-        [Permission(MyPromoteLevel.Admin)]
-        public void Example()
-        {
-            this.Context.Respond("response string");
-                
-        }
 
-
-        [Command("Test", "Adds money to player. Needed SteamID.", null)]
+        [Command("claim", "Get your referral bonus", "Get your referral bonus")]
         [Permission(MyPromoteLevel.None)]
-        public void GiveCredits(ulong steamId, long amount)
+        public void Claim()
         {
-            long identityId = Sync.Players.TryGetIdentityId(steamId, 0);
-            if (identityId == 0)
-                this.Context.Respond("Fuck"+ Sync.Players.TryGetIdentityNameFromSteamId(steamId).ToString());
-            else if (FinancialService.GivePlayerCredits(identityId, amount))
-                this.Context.Respond("test worked money added fuck yeah" + Sync.Players.TryGetIdentityNameFromSteamId(steamId));
-           
-        }
-        
-        [Command("yes", "yes", "yes")]
-        [Permission(MyPromoteLevel.None)]
-        public void yes()
-        {
-            var rd = new ReferredDescription { ReferredUserName = "steave", ReferredUserId = 42l};
-            var u = ReferralCore.GetUser(76561198992724985L);
-            u.ReferralCode = "fucking no";
-            u.ReferralByUser = true;
-            u.ReferredDescriptions.Add(rd);
-            ReferralCore.SaveUser(u);
-            Context.Respond("Check your data bro");
+            if (Context.Player == null)
+            {
+                Log.Error("Why are you running this in the console?");
+                return;
+            }
+
+            var user = ReferralCore.GetUser(Context.Player.SteamUserId);
+
+            user.ReferredDescriptions.ForEach(
+                rd
+                    =>
+                {
+                    if (rd.Claimed) return;
+                    var c = ReferralCore.Dostuff(user);
+                    if (c)
+                    {
+                        rd.Claimed = true;
+                        ReferralCore.SaveUser(user);
+                        Context.Respond($"Claimed for {rd.ReferredUserName}");
+                    }
+                    else
+                    {
+                        //lmao
+                        Context.Respond($"Failed to Claim for {rd.ReferredUserName}, This should never happen, see a admin and report code 42");
+                    }
+                }
+            );
+            Context.Respond("done.");
+
         }
     }
 }
