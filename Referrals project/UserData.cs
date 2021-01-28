@@ -18,7 +18,14 @@ namespace Referrals_project
         public ulong? ReferredBy { get; set; }
         public string ReferralCode { get; set; }
         public List<ReferredDescription> ReferredDescriptions { get; set; }
+
+        public User()
+        {
+            ReferredDescriptions = new List<ReferredDescription>();
+        }
+        
     }
+    
 
     public class ReferredDescription : ViewModel
     {
