@@ -1,4 +1,5 @@
-﻿using Torch;
+﻿using System.Windows.Documents;
+using Torch;
 
 namespace Referrals_project
 {
@@ -6,7 +7,7 @@ namespace Referrals_project
     {
         private bool _referralrewards = true;
         private bool _promotionrewardenabled = true;
-        private string _serverreferralcode = "server test code";
+        private List _serverreferralcode = new List();
         private string _promotionrewardscode = "Promotiontestcode";
         
         public bool ReferralRewardsEnabled
@@ -21,7 +22,7 @@ namespace Referrals_project
             set => SetValue(ref _promotionrewardenabled, value);
         }
         
-        public string ServerReferralCode
+        public List ServerReferralCode
         {
             get => _serverreferralcode; 
             set => SetValue(ref _serverreferralcode, value);
