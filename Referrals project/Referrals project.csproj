@@ -345,6 +345,7 @@
     <Compile Include="ReferralCore.cs" />
     <Compile Include="SpawnService.cs" />
     <Compile Include="UserData.cs" />
+    <Compile Include="Utilities.cs" />
     <Page Include="ReferralContorls.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
