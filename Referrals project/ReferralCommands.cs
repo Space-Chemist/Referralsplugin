@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using Nest;
 using NLog;
 using Sandbox.Game.Multiplayer;
+using Sandbox.Game.Screens.ViewModels;
 using Sandbox.Game.World;
 using Torch.Commands;
 using Torch.Commands.Permissions;
@@ -18,6 +18,14 @@ namespace Referrals_project
         {
             get { return (Referrals_project.ReferralCore) this.Context.Plugin; }
         }
+
+        [Command("test")]
+        [Permission(MyPromoteLevel.None)]
+        public void thng()
+        {
+           Context.Respond(ReferralCore.Instance.StoragePath); 
+        }
+            
 
 
         [Command("new", "get your referral bonus", "requries steamId/Name")]

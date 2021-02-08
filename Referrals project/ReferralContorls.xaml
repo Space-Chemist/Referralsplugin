@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Referrals_project"
         mc:Ignorable="d">
-    <Grid d:DataContext="{d:DesignInstance }">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
             <ColumnDefinition Width="Auto"/>
@@ -100,15 +100,15 @@
         </Popup>
         
         <!--Left Grid area Webserver enabled -->
-        <Grid x:Name="ReferralDataGrid" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
-            <DataGrid x:Name ="DataGrid" ItemsSource="{Binding}" AlternatingRowBackground = "LightGray" AutoGenerateColumns="False" AlternationCount = "2">
+        <!--<Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">
+            <DataGrid x:Name="Info" ItemsSource="{Binding}" AlternatingRowBackground = "LightGray" AutoGenerateColumns="False" AlternationCount = "2">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Player Name" Binding="{Binding Name, FallbackValue='Unknown User'}"/>
-                    <DataGridCheckBoxColumn Header="Referred By Player" Binding="{Binding ReferralByUser, FallbackValue='N/A'}"/>
-                    <DataGridCheckBoxColumn Header="Referred By Code" Binding="{Binding ReferralByCode, FallbackValue='N/A'}"/>
-                    <DataGridTextColumn Header="Player Steam Id" Binding="{Binding SteamId}"/>
-                    <DataGridTextColumn Header="Referred By" Binding="{Binding ReferredBy, FallbackValue='N/A'}" />
-                    <DataGridTextColumn Header="Referral Code" Binding="{Binding ReferralCode, FallbackValue='N/A'}"/>
+                    <DataGridTextColumn Header="Player Name" Binding="{Binding  Path=Name}"/>
+                    <DataGridCheckBoxColumn Header="Referred By Player" Binding="{Binding Path=ReferralByUser, FallbackValue='N/A'}"/>
+                    <DataGridCheckBoxColumn Header="Referred By Code" Binding="{Binding Path=ReferralByCode, FallbackValue='N/A'}"/>
+                    <DataGridTextColumn Header="Player Steam Id" Binding="{Binding Path=SteamId}"/>
+                    <DataGridTextColumn Header="Referred By" Binding="{Binding Path=ReferredBy, FallbackValue='N/A'}" />
+                    <DataGridTextColumn Header="Referral Code" Binding="{Binding Path=ReferralCod, FallbackValue='N/A'}"/>
                     <DataGridTemplateColumn Header=" Referred Data">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -116,8 +116,8 @@
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel>
-                                                <TextBlock Text="{Binding Path=ReferredUserId}"/>
-                                                <TextBlock Text="{Binding Path=ReferredUserName}"/>
+                                                <TextBlock x:Name="ReferredDescriptions_ReferredUserName"/>
+                                                <TextBlock x:Name="ReferredDescriptions_ReferredUserId"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
@@ -127,6 +127,6 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>    
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>

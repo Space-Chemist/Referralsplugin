@@ -17,6 +17,7 @@ using System.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using Caliburn.Micro;
 
 
 namespace Referrals_project
@@ -26,6 +27,7 @@ namespace Referrals_project
     /// </summary>
     public partial class ReferralControls : UserControl
     {
+        public BindableCollection<User> Data { get; set; }
         //public ObservableCollection<User> UserData { get; } = new ObservableCollection<User>();
         //public ObservableCollection<User> UserData { get; set; }
         public ReferralControls()
@@ -38,16 +40,27 @@ namespace Referrals_project
         public ReferralControls(ReferralCore plugin) : this() {
             Plugin = plugin;
             DataContext = plugin.Config;
-            var userData = ReferralCore.UserDataFromStorage().Users;
-            ObservableCollection<User> userInfo = new ObservableCollection<User>(userData);
-            DataGrid.DataContext = userInfo;
-            
+            //var userData = ReferralCore.UserDataFromStorage().Users;
+            //ObservableCollection<User> userInfo = new ObservableCollection<User>(userData);
+           //DataGrid.DataContext = userInfo;
+           //DataSet dataSet = new DataSet();
+           //string sampleXmlFile = ReferralCore.UserDataPath;
+           //dataSet.ReadXml(sampleXmlFile);
+           //DataView dataView = new DataView(dataSet.Tables[0]);
+           //DataGrid.ItemsSource = dataSet.Tables[0].DefaultView;
+           //string sampleXmlFile = ReferralCore.UserDataPath;
+           //(this.Resources["XmlData"] as XmlDataProvider).Source = new Uri(sampleXmlFile);
+           //Info.DataContext = Data;
+           
         }
         
+        
+
         private Referrals_project.ReferralCore Plugin { get; }
         
         private void ServerReferralRewardConfigButton_OnClick(object sender, RoutedEventArgs e)
         {
+            
             ServerReferralRewardsConfig.IsOpen = true;
         }
 
@@ -80,4 +93,6 @@ namespace Referrals_project
         }
 
     }
+
+    
 }

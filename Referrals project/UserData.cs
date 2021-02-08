@@ -34,4 +34,5 @@ namespace Referrals_project
 
         public bool Claimed { get; set; }
     }
+
 }
