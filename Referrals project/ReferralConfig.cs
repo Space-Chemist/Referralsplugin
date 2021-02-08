@@ -7,7 +7,7 @@ namespace Referrals_project
     {
         private bool _referralrewards = true;
         private bool _promotionrewardenabled = true;
-        private List _serverreferralcode = new List();
+        private string _serverreferralcode = "testcode";
         private string _promotionrewardscode = "Promotiontestcode";
         
         public bool ReferralRewardsEnabled
@@ -22,7 +22,7 @@ namespace Referrals_project
             set => SetValue(ref _promotionrewardenabled, value);
         }
         
-        public List ServerReferralCode
+        public string ServerReferralCode
         {
             get => _serverreferralcode; 
             set => SetValue(ref _serverreferralcode, value);
