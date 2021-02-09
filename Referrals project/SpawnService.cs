@@ -35,20 +35,19 @@ namespace Referrals_project
         private readonly HashSet<IMyCubeGrid> _spawned;
         private readonly Chat _Response;
         private static int Timeout = 6000;
-        public bool _AlignToGravity = false;
+        public bool _AlignToGravity = true;
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        public ParallelSpawner(MyObjectBuilder_CubeGrid[] grids, Chat chat, bool AlignToGravity = false, Action<HashSet<IMyCubeGrid>> callback = null)
+        public ParallelSpawner(MyObjectBuilder_CubeGrid[] grids, bool AlignToGravity = true, Action<HashSet<IMyCubeGrid>> callback = null)
         {
             _grids = grids;
             _maxCount = grids.Length;
             _callback = callback;
             _spawned = new HashSet<IMyCubeGrid>();
-            _Response = chat;
             _AlignToGravity = AlignToGravity;
         }
 
-        public bool Start(bool LoadInOriginalPosition, Vector3D Target)
+        public bool Start(Vector3D Target)
         {
             if (_grids.Length == 0)
             {
@@ -69,7 +68,7 @@ namespace Referrals_project
 
             
 
-            Task<bool> Spawn = Events.GameEvents.InvokeAsync<bool, Vector3D, bool>(CalculateSafePositionAndSpawn, LoadInOriginalPosition, Target);
+            Task<bool> Spawn = Events.GameEvents.InvokeAsync<bool, Vector3D, bool>(CalculateSafePositionAndSpawn, true, Target);
             if (Spawn.Wait(Timeout))
             {
                 if (Spawn.Result)
@@ -97,78 +96,21 @@ namespace Referrals_project
 
         private bool CalculateSafePositionAndSpawn(bool keepOriginalLocation, Vector3D Target)
         {
-            //This has to be ran on the main game thread!
-            if (keepOriginalLocation)
+            /* Where do we want to paste the grids? Lets find out. */
+            var pos = FindPastePosition(Target);
+            if (pos == null)
             {
-                var BoundingBox = FindBoundingBox(_grids);
-
-               
-
-                //sphere.Center = Target;
-                List<MyEntity> entities = new List<MyEntity>();
-                MyGamePruningStructure.GetAllEntitiesInOBB(ref BoundingBox, entities);
-
-               
-                Log.Debug(BoundingBox.ToString());
-
-                Log.Debug(entities.Count.ToString());
-                bool PotentialGrids = false;
-                foreach (var entity in entities)
-                {
-                    if (entity is MyCubeGrid )
-                    {
-                        PotentialGrids = true;
-
-                        BoundingBox Box = entity.PositionComp.LocalAABB;
-                        ContainmentType Type = BoundingBox.Contains(ref Box);
-                        
-                       Log.Debug(entity.DisplayName + " is intersecting spawn area! Containment Type: "+ Type.ToString());
-                        
-
-                        _Response.Respond("There are potentially other grids in the way. Attempting to spawn around the location to avoid collisions.");
-                        break;
-                    }
-                }
-
-
-                if (PotentialGrids)
-                {
-                    var pos = FindPastePosition(Target);
-                    if (!pos.HasValue)
-                    {
-                        _Response.Respond("No free spawning zone found! Stopping load!");
-                        return false;
-                    }
-
-                    UpdateGridsPosition(pos.Value);
-                    return true;
-                }
-                else
-                {
-                    return true;
-                }
+                _Response.Respond("No free spawning zone found! Stopping load!");
+                return false;
             }
 
+            var newPosition = pos.Value;
 
-            //Everything else is loading for near point
-            if (!keepOriginalLocation)
+            /* Update GridsPosition if that doesnt work get out of here. */
+            if (!UpdateGridsPosition(newPosition))
             {
-                /* Where do we want to paste the grids? Lets find out. */
-                var pos = FindPastePosition(Target);
-                if (pos == null)
-                {
-                    _Response.Respond("No free spawning zone found! Stopping load!");
-                    return false;
-                }
-
-                var newPosition = pos.Value;
-
-                /* Update GridsPosition if that doesnt work get out of here. */
-                if (!UpdateGridsPosition(newPosition))
-                {
-                    _Response.Respond("The File to be imported does not seem to be compatible with the server!");
-                    return false;
-                }
+                _Response.Respond("The File to be imported does not seem to be compatible with the server!");
+                return false;
             }
             return true;
         }
@@ -513,12 +455,12 @@ namespace Referrals_project
             }
             else
             {
-                _context.Respond(response, Color.Yellow, "Hangar");
+                _context.Respond(response, Color.RoyalBlue, "Referral");
             }
         }
         public static void Respond(string response, CommandContext context)
         {
-            context.Respond(response, Color.Yellow, "Hangar");
+            context.Respond(response, Color.RoyalBlue, "Referral");
         }
     }
 }
