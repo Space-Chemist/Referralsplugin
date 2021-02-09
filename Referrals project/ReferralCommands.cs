@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using NLog;
 using Sandbox.Game.Multiplayer;
 using Sandbox.Game.Screens.ViewModels;
@@ -6,24 +7,89 @@ using Sandbox.Game.World;
 using Torch.Commands;
 using Torch.Commands.Permissions;
 using VRage.Game.ModAPI;
+using System.Threading.Tasks;
+using Sandbox.Definitions;
+using Sandbox.Game.Entities;
+using Sandbox.Game.Entities.Character;
+using VRage.Game.Definitions.SessionComponents;
+using VRage.Groups;
+using VRageMath;
 
 namespace Referrals_project
 {
     [Category("referral")]
     public class ReferralCommands : CommandModule
     {
-        private static readonly Logger Log = LogManager.GetLogger("koth");
-
+        private static readonly Logger Log = LogManager.GetLogger("Referrals");
+        private MyCharacter myCharacter;
         public Referrals_project.ReferralCore Plugin
         {
             get { return (Referrals_project.ReferralCore) this.Context.Plugin; }
         }
 
-        [Command("test")]
+        [Command("save", "Saves targeted grid in hangar")]
         [Permission(MyPromoteLevel.None)]
-        public void thng()
+        public void Save()
         {
-           Context.Respond(ReferralCore.Instance.StoragePath); 
+            var controlledEntity = Context.Player.Character;
+            const float range = 5000;
+            Matrix worldMatrix;
+            Vector3D startPosition;
+            Vector3D endPosition;
+
+            worldMatrix = controlledEntity.GetHeadMatrix(true, true, false); // dead center of player cross hairs, or the direction the player is looking with ALT.
+            startPosition = worldMatrix.Translation + worldMatrix.Forward * 0.5f;
+            endPosition = worldMatrix.Translation + worldMatrix.Forward * (range + 0.5f);
+
+            var list = new Dictionary<MyGroups<MyCubeGrid, MyGridPhysicalGroupData>.Group, double>();
+            var ray = new RayD(startPosition, worldMatrix.Forward);
+
+            foreach (var group in MyCubeGridGroups.Static.Physical.Groups)
+            {
+
+                foreach (MyGroups<MyCubeGrid, MyGridPhysicalGroupData>.Node groupNodes in group.Nodes)
+                {
+
+                    MyCubeGrid cubeGrid = groupNodes.NodeData;
+                    if (cubeGrid != null)
+                    {
+
+                        if (cubeGrid.Physics == null)
+                            continue;
+
+                        // check if the ray comes anywhere near the Grid before continuing.    
+                        if (ray.Intersects(cubeGrid.PositionComp.WorldAABB).HasValue)
+                        {
+
+                            Vector3I? hit = cubeGrid.RayCastBlocks(startPosition, endPosition);
+
+                            if (hit.HasValue)
+                            {
+                                Log.Error(cubeGrid.Name.ToString);
+                                var GridName = cubeGrid.Name;
+                                var FolderDirectory = ReferralCore.Instance.StoragePath;
+                                GridMethods methods = new GridMethods(FolderDirectory, GridName);
+                                Task T = new Task(() => methods.SaveGrids(cubeGrid, GridName));
+                                T.Start();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        [Command("load", "Loads given grid from hangar")]
+        [Permission(MyPromoteLevel.None)]
+        public void Load(string GridName)
+        {
+            var FolderDirectory = ReferralCore.Instance.StoragePath;
+            var myIdentity = ((MyPlayer)Context.Player).Identity;
+            var TargetIdentity = myIdentity.IdentityId;
+            var myCharacter = myIdentity.Character;
+
+            GridMethods methods = new GridMethods(FolderDirectory, GridName);
+            Task T = new Task(() => methods.LoadGrid(GridName, myCharacter, TargetIdentity));
+            T.Start();
         }
             
 
@@ -121,5 +187,6 @@ namespace Referrals_project
             Context.Respond("done.");
 
         }
+
     }
 }

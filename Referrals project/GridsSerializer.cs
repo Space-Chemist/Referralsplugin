@@ -27,7 +27,7 @@ namespace Referrals_project
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        public string FolderPath = ReferralCore.Instance.StoragePath;
+        public string FolderPath;
         private ulong SteamID;
         private CommandContext Context;
 
@@ -68,6 +68,8 @@ namespace Referrals_project
 
         public bool LoadGrid(string GridName, MyCharacter Player, long TargetPlayerID)
         {
+            Log.Warn("LoadGrid ran");
+            
             string path = Path.Combine(FolderPath, GridName + ".sbc");
 
             if (!File.Exists(path))
@@ -141,18 +143,14 @@ namespace Referrals_project
             return Spawner.Start(TargetLocation);
         }
         
-        public bool SaveGrids(List<MyCubeGrid> grids, string GridName)
+        public bool SaveGrids(MyCubeGrid cubeGrid, string GridName)
         {
             List<MyObjectBuilder_CubeGrid> objectBuilders = new List<MyObjectBuilder_CubeGrid>();
 
-            foreach (MyCubeGrid grid in grids)
-            {
-                /* What else should it be? LOL? */
-                if (!(grid.GetObjectBuilder() is MyObjectBuilder_CubeGrid objectBuilder))
-                    throw new ArgumentException(grid + " has a ObjectBuilder thats not for a CubeGrid");
+            if (!(cubeGrid.GetObjectBuilder() is MyObjectBuilder_CubeGrid objectBuilder))
+                throw new ArgumentException(cubeGrid + " has a ObjectBuilder thats not for a CubeGrid");
 
-                objectBuilders.Add(objectBuilder);
-            }
+            objectBuilders.Add(objectBuilder);
 
             try
             {
@@ -187,6 +185,7 @@ namespace Referrals_project
                 Log.Error("Saving Grid Failed!", e);
                 return false;
             }
+
         }
     }
 }
