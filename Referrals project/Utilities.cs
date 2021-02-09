@@ -301,5 +301,54 @@ namespace Referrals_project
             }
 
         }
+        
+        public bool InitilizeCharacter()
+        {
+
+            if (!Plugin.Config.PluginEnabled)
+                return false;
+
+            if (Context.Player == null)
+            {
+                chat.Respond("You cant do this via console stupid!");
+                return false;
+            }
+            myIdentity = ((MyPlayer)Context.Player).Identity;
+            TargetIdentity = myIdentity.IdentityId;
+
+            if (myIdentity.Character == null)
+            {
+                chat.Respond("Player has no Character");
+                return false;
+            }
+
+            myCharacter = myIdentity.Character;
+
+            Methods = new GridMethods(PlayerSteamID, Plugin.Config.FolderDirectory, this);
+            PlayerHangarPath = Methods.FolderPath;
+
+
+            MaxHangarSlots = Plugin.Config.NormalHangarAmount;
+
+
+            if (Context.Player.PromoteLevel == MyPromoteLevel.Scripter)
+            {
+                MaxHangarSlots = Plugin.Config.ScripterHangarAmount;
+            }
+            else if (Context.Player.PromoteLevel == MyPromoteLevel.Moderator)
+            {
+                MaxHangarSlots = Plugin.Config.ScripterHangarAmount * 2;
+            }
+            else if (Context.Player.PromoteLevel >= MyPromoteLevel.Admin)
+            {
+                MaxHangarSlots = Plugin.Config.ScripterHangarAmount * 10;
+            }
+
+
+
+            return true;
+
+        }
+
     }
 }
