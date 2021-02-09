@@ -9,6 +9,10 @@ namespace Referrals_project
         private bool _promotionrewardenabled = true;
         private string _serverreferralcode = "testcode";
         private string _promotionrewardscode = "Promotiontestcode";
+        private string _serverreferralgrid = "Grid Name";
+        private string _promotionrewardsgrid = "Grid Name";
+        private string _playerreferralgrid = "Grid Name";
+        
         
         public bool ReferralRewardsEnabled
         {
@@ -32,6 +36,24 @@ namespace Referrals_project
         {
             get => _promotionrewardscode;
             set => SetValue(ref _promotionrewardscode, value);
+        }
+        
+        public string ServerReferralGrid
+        {
+            get => _serverreferralgrid; 
+            set => SetValue(ref _serverreferralgrid, value);
+        }
+        
+        public string PromotionRewardsGrid
+        {
+            get => _promotionrewardsgrid;
+            set => SetValue(ref _promotionrewardsgrid, value);
+        }
+        
+        public string PlayerReferralGrid
+        {
+            get => _playerreferralgrid;
+            set => SetValue(ref _playerreferralgrid, value);
         }
     }
 }

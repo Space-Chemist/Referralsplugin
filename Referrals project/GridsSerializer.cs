@@ -69,7 +69,7 @@ namespace Referrals_project
         public bool LoadGrid(string GridName, MyCharacter Player, long TargetPlayerID)
         {
             Log.Warn("LoadGrid ran");
-            
+
             string path = Path.Combine(FolderPath, GridName + ".sbc");
 
             if (!File.Exists(path))

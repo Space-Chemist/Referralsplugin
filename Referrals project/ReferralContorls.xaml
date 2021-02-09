@@ -41,14 +41,28 @@
             <TextBlock  VerticalAlignment="Center" Text="Promotion Rewards Code" Margin="5"/>
             <TextBox x:Name="PromotionRewardsCode" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding PromotionRewardsCode}"/>
         </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
+            <TextBlock  VerticalAlignment="Center" Text="Server Referral Grid" Margin="5"/>
+            <TextBox x:Name="ServerReferralGrid" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding ServerReferralGrid}"/>
+        </StackPanel>
         
-        <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="4">
+        <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal">
+            <TextBlock  VerticalAlignment="Center" Text="Promotion Rewards Grid" Margin="5"/>
+            <TextBox x:Name="PromotionRewardsGrid" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding PromotionRewardsGrid}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="2" Grid.Row="4" Orientation="Horizontal">
+            <TextBlock  VerticalAlignment="Center" Text="Player Referral Grid" Margin="5"/>
+            <TextBox x:Name="PlayerReferralGrid" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding PlayerReferralGrid}"/>
+        </StackPanel>
+        
+        <!--<StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="4">
             <Button  Content="Server Referral Reward Config" Margin="5" Click="ServerReferralRewardConfigButton_OnClick" />
             <Button  Content="User Referral Reward Config" Margin="5" Click="UserReferralRewardConfigButton_OnClick" />
             <Button  Content="Promotion Reward Config" Margin="5" Click="PromotionCodeRewardConfigButton_OnClick" />
-        </StackPanel> 
+        </StackPanel> -->
         
-        <Popup Name="ServerReferralRewardsConfig" Placement="Mouse" HorizontalOffset="-100" VerticalOffset="-100" AllowsTransparency="False">
+        <!--<Popup Name="ServerReferralRewardsConfig" Placement="Mouse" HorizontalOffset="-100" VerticalOffset="-100" AllowsTransparency="False">
             <Grid>
                 <Border Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Padding="25">
                     <StackPanel>
@@ -97,7 +111,7 @@
                     </StackPanel>
                 </Border>
             </Grid>
-        </Popup>
+        </Popup>-->
         
         <!--Left Grid area Webserver enabled -->
         <!--<Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4">

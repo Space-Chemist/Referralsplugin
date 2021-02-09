@@ -58,7 +58,7 @@ namespace Referrals_project
 
         private Referrals_project.ReferralCore Plugin { get; }
         
-        private void ServerReferralRewardConfigButton_OnClick(object sender, RoutedEventArgs e)
+        /*private void ServerReferralRewardConfigButton_OnClick(object sender, RoutedEventArgs e)
         {
             
             ServerReferralRewardsConfig.IsOpen = true;
@@ -90,7 +90,7 @@ namespace Referrals_project
         {
             PromotionCodeRewardsConfig.IsOpen = false;
             Plugin.Save();
-        }
+        }*/
 
     }
 
