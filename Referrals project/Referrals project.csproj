@@ -337,6 +337,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckResult.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="FinancialService.cs" />
     <Compile Include="GridsSerializer.cs" />

@@ -32,6 +32,8 @@ namespace Referrals_project
         public void Save()
         {
             var controlledEntity = Context.Player.Character;
+            var result = Utilities.FixShip(controlledEntity);
+            /*var controlledEntity = Context.Player.Character;
             const float range = 5000;
             Matrix worldMatrix;
             Vector3D startPosition;
@@ -65,17 +67,12 @@ namespace Referrals_project
 
                             if (hit.HasValue)
                             {
-                                Log.Error(cubeGrid.Name.ToString);
-                                var GridName = cubeGrid.Name;
-                                var FolderDirectory = ReferralCore.Instance.StoragePath;
-                                GridMethods methods = new GridMethods(FolderDirectory, GridName);
-                                Task T = new Task(() => methods.SaveGrids(cubeGrid, GridName));
-                                T.Start();
+                                
                             }
                         }
                     }
                 }
-            }
+            }*/
         }
 
         [Command("load", "Loads given grid from hangar")]
