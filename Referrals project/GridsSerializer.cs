@@ -94,6 +94,20 @@ namespace Referrals_project
                     }
 
                     //If the configs have keep originial position on, we dont want to align this to gravity.
+                    foreach (MyObjectBuilder_ShipBlueprintDefinition definition in shipBlueprints)
+                    {
+
+                        foreach (MyObjectBuilder_CubeGrid CubeGridDef in definition.CubeGrids)
+                        {
+                            foreach (MyObjectBuilder_CubeBlock block in CubeGridDef.CubeBlocks)
+                            {
+
+                                block.Owner = TargetPlayerID;
+                                block.BuiltBy = TargetPlayerID;
+
+                            }
+                        }
+                    }
 
                     foreach (var shipBlueprint in shipBlueprints)
                     {
