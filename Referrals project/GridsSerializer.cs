@@ -15,6 +15,7 @@ using NLog;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game.Entities.Character;
 using Sandbox.Game.Entities.Cube;
+using Sandbox.Game.Screens.DebugScreens.Game;
 using Sandbox.Game.World;
 using Torch.Commands;
 using VRage.Game;
@@ -26,7 +27,7 @@ namespace Referrals_project
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        public string FolderPath;
+        public string FolderPath = ReferralCore.Instance.StoragePath;
         private ulong SteamID;
         private CommandContext Context;
 
@@ -138,6 +139,54 @@ namespace Referrals_project
             ParallelSpawner Spawner = new ParallelSpawner(grids, AlignToGravity);
             Log.Info("Attempting Grid Spawning @" + TargetLocation.ToString());
             return Spawner.Start(TargetLocation);
+        }
+        
+        public bool SaveGrids(List<MyCubeGrid> grids, string GridName)
+        {
+            List<MyObjectBuilder_CubeGrid> objectBuilders = new List<MyObjectBuilder_CubeGrid>();
+
+            foreach (MyCubeGrid grid in grids)
+            {
+                /* What else should it be? LOL? */
+                if (!(grid.GetObjectBuilder() is MyObjectBuilder_CubeGrid objectBuilder))
+                    throw new ArgumentException(grid + " has a ObjectBuilder thats not for a CubeGrid");
+
+                objectBuilders.Add(objectBuilder);
+            }
+
+            try
+            {
+                //Need To check grid name
+
+                string GridSavePath = Path.Combine(FolderPath, GridName + ".sbc");
+
+                //Log.Info("SavedDir: " + pathForPlayer);
+                bool saved = SaveGridToFile(GridSavePath, GridName, objectBuilders);
+
+                try
+                {
+                    
+                    MyIdentity IDentity = MySession.Static.Players.TryGetPlayerIdentity(new MyPlayer.PlayerId(SteamID));
+
+                }
+                catch (Exception e)
+                {
+                    Log.Fatal(e);
+                }
+
+                if (saved)
+                {
+                    Log.Error("grid saved");
+                }
+
+
+                return saved;
+            }
+            catch (Exception e)
+            {
+                Log.Error("Saving Grid Failed!", e);
+                return false;
+            }
         }
     }
 }
