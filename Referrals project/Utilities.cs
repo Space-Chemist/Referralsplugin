@@ -145,7 +145,5 @@ namespace Referrals_project
 
             return CheckResult.OK;
         }
-
-
     }
 }
