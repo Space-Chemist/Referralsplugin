@@ -103,24 +103,24 @@ namespace Referrals_project
             return bag;
         }
         
-        public static CheckResult FixShip(IMyCharacter character) {
+        public static CheckResult GetShip(IMyCharacter character) {
 
             ConcurrentBag<MyGroups<MyCubeGrid, MyGridPhysicalGroupData>.Group> groups = FindLookAtGridGroup(character);
 
-            return FixGroups(groups);
+            return GetGroups(groups);
         }
 
-        private static CheckResult FixGroups(ConcurrentBag<MyGroups<MyCubeGrid, MyGridPhysicalGroupData>.Group> groups) {
+        private static CheckResult GetGroups(ConcurrentBag<MyGroups<MyCubeGrid, MyGridPhysicalGroupData>.Group> groups) {
 
             var result = CheckGroups(groups, out MyGroups<MyCubeGrid, MyGridPhysicalGroupData>.Group group);
 
             if (result != CheckResult.OK)
                 return result;
 
-            return FixGroup(group);
+            return GetGroup(group);
         }
 
-        private static CheckResult FixGroup(MyGroups<MyCubeGrid, MyGridPhysicalGroupData>.Group group) 
+        private static CheckResult GetGroup(MyGroups<MyCubeGrid, MyGridPhysicalGroupData>.Group group) 
         {
             List<MyObjectBuilder_EntityBase> objectBuilderList = new List<MyObjectBuilder_EntityBase>();
             List<MyCubeGrid> gridsList = new List<MyCubeGrid>();

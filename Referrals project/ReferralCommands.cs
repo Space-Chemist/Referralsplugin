@@ -17,7 +17,7 @@ using VRageMath;
 
 namespace Referrals_project
 {
-    [Category("referral")]
+    [Category("r")]
     public class ReferralCommands : CommandModule
     {
         private static readonly Logger Log = LogManager.GetLogger("Referrals");
@@ -32,50 +32,10 @@ namespace Referrals_project
         public void Save()
         {
             var controlledEntity = Context.Player.Character;
-            var result = Utilities.FixShip(controlledEntity);
-            /*var controlledEntity = Context.Player.Character;
-            const float range = 5000;
-            Matrix worldMatrix;
-            Vector3D startPosition;
-            Vector3D endPosition;
-
-            worldMatrix = controlledEntity.GetHeadMatrix(true, true, false); // dead center of player cross hairs, or the direction the player is looking with ALT.
-            startPosition = worldMatrix.Translation + worldMatrix.Forward * 0.5f;
-            endPosition = worldMatrix.Translation + worldMatrix.Forward * (range + 0.5f);
-
-            var list = new Dictionary<MyGroups<MyCubeGrid, MyGridPhysicalGroupData>.Group, double>();
-            var ray = new RayD(startPosition, worldMatrix.Forward);
-
-            foreach (var group in MyCubeGridGroups.Static.Physical.Groups)
-            {
-
-                foreach (MyGroups<MyCubeGrid, MyGridPhysicalGroupData>.Node groupNodes in group.Nodes)
-                {
-
-                    MyCubeGrid cubeGrid = groupNodes.NodeData;
-                    if (cubeGrid != null)
-                    {
-
-                        if (cubeGrid.Physics == null)
-                            continue;
-
-                        // check if the ray comes anywhere near the Grid before continuing.    
-                        if (ray.Intersects(cubeGrid.PositionComp.WorldAABB).HasValue)
-                        {
-
-                            Vector3I? hit = cubeGrid.RayCastBlocks(startPosition, endPosition);
-
-                            if (hit.HasValue)
-                            {
-                                
-                            }
-                        }
-                    }
-                }
-            }*/
+            var result = Utilities.GetShip(controlledEntity);
         }
 
-        [Command("load", "Loads given grid from hangar")]
+        [Command("testload", "Loads reward grid to ensure proper save")]
         [Permission(MyPromoteLevel.None)]
         public void Load(string GridName)
         {
