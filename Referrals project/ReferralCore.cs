@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using NLog;
 using System.Xml.Serialization;
@@ -14,6 +15,7 @@ using Torch.API.Plugins;
 using Torch.API.Session;
 using Torch.Session;
 using VRage.Game.ModAPI;
+using VRage.RemoteClient.Core;
 
 namespace Referrals_project
 {
@@ -35,7 +37,6 @@ namespace Referrals_project
 
         public override void Init(ITorchBase torch)
         {
-            
             base.Init(torch);
             Instance = this;
             SessionManager = Torch.Managers.GetManager<TorchSessionManager>();
@@ -45,8 +46,9 @@ namespace Referrals_project
             if (!File.Exists(UserDataPath))
             {
                 var serializer = new XmlSerializer(typeof(UserData));
-                var userData = new UserData { Users = new List<User>()};
-                using (var fileWriter = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
+                var userData = new UserData {Users = new List<User>()};
+                using (var fileWriter = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite,
+                    FileShare.ReadWrite))
                 {
                     serializer.Serialize(fileWriter, userData);
                 }
@@ -97,7 +99,7 @@ namespace Referrals_project
                 return (UserData) serializer.Deserialize(reader);
             }
         }
-        
+
 
         public static User GetUser(ulong steamId)
         {
@@ -136,27 +138,46 @@ namespace Referrals_project
             }
 
 
-            using (var fileWriter = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (var fileWriter = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite,
+                FileShare.ReadWrite))
             {
                 serializer.Serialize(fileWriter, userData);
             }
         }
 
 
-        public static bool Dostuff(User user)
+        public static bool Dostuff(User user, IMyPlayer player)
         {
-            return true;
+            var folderDirectory = ReferralCore.Instance.StoragePath;
+            var myIdentity = ((MyPlayer) player).Identity;
+            var targetIdentity = myIdentity.IdentityId;
+            var myCharacter = myIdentity.Character;
+            if (user.ReferralByUser != null)
+            {
+                if ((bool) user.ReferralByUser)
+                {
+                    var methods = new GridMethods(folderDirectory, "GridName");
+                    return methods.LoadGrid("GridNme", myCharacter, targetIdentity);
+                }
+            }
+
+            if (user.ReferralByCode == null) return false;
+            {
+                if (!(bool) user.ReferralByCode) return false;
+                var methods = new GridMethods(folderDirectory, "GridName");
+                return methods.LoadGrid("GridNme", myCharacter, targetIdentity);
+            }
         }
-        
+
         //full credit to https://github.com/TorchAPI/Essentials/blob/415a7e12809c75fc1efcfbc878cfee1730efa6ff/Essentials/Utilities.cs#L56
-        public static IMyIdentity GetIdentityByNameOrIds(string playerNameOrIds) 
+        public static IMyIdentity GetIdentityByNameOrIds(string playerNameOrIds)
         {
-            foreach (var identity in MySession.Static.Players.GetAllIdentities()) 
+            foreach (var identity in MySession.Static.Players.GetAllIdentities())
             {
                 if (identity.DisplayName == playerNameOrIds)
                     return identity;
 
-                if (long.TryParse(playerNameOrIds, out var identityId)) 
+                if (long.TryParse(playerNameOrIds, out var identityId))
                     if (identity.IdentityId == identityId)
                         return identity;
 
@@ -165,19 +186,20 @@ namespace Referrals_project
                 if (id == steamId)
                     return identity;
             }
+
             return null;
         }
-        
-        
+
+
         public void Save()
         {
             _config.Save();
         }
-        
+
         public override void Dispose()
         {
             if (SessionManager != null)
-                 SessionManager.SessionStateChanged -= SessionManagerOnSessionStateChanged;
+                SessionManager.SessionStateChanged -= SessionManagerOnSessionStateChanged;
             SessionManager = null;
         }
     }

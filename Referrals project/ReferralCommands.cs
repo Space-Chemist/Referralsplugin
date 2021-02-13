@@ -90,7 +90,7 @@ namespace Referrals_project
 
             var user2 = ReferralCore.GetUser(MySession.Static.Players.TryGetSteamId(identity.IdentityId));
 
-            var check = ReferralCore.Dostuff(user1);
+            var check = ReferralCore.Dostuff(user1, Context.Player);
             if (!check)
             {
                 Log.Error("Failed to do stuff");
@@ -127,7 +127,7 @@ namespace Referrals_project
                     =>
                 {
                     if (rd.Claimed) return;
-                    var c = ReferralCore.Dostuff(user);
+                    var c = ReferralCore.Dostuff(user, Context.Player);
                     if (c)
                     {
                         rd.Claimed = true;
