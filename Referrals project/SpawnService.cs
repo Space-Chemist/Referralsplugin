@@ -55,18 +55,13 @@ namespace Referrals_project
                 return true;
             }
 
-
             MyEntities.RemapObjectBuilderCollection(_grids);
-
 
             if (_AlignToGravity)
             {
                 EnableRequiredItemsOnLoad(_grids);
                 CalculateGridPosition(Target);
             }
-
-
-            
 
             Task<bool> Spawn = Events.GameEvents.InvokeAsync<bool, Vector3D, bool>(CalculateSafePositionAndSpawn, true, Target);
             if (Spawn.Wait(Timeout))
@@ -90,10 +85,6 @@ namespace Referrals_project
                 return false;
             }
         }
-
-
-
-
         private bool CalculateSafePositionAndSpawn(bool keepOriginalLocation, Vector3D Target)
         {
             /* Where do we want to paste the grids? Lets find out. */
@@ -114,7 +105,6 @@ namespace Referrals_project
             }
             return true;
         }
-
         private Vector3D? FindPastePosition(Vector3D Target)
         {
 
@@ -126,10 +116,8 @@ namespace Referrals_project
 
             return MyEntities.FindFreePlaceCustom(Target, (float)sphere.Radius, 90, 10, 1.5f, 5);
         }
-
         private static BoundingSphereD FindBoundingSphere(MyObjectBuilder_CubeGrid[] grids)
         {
-
             Vector3? vector = null;
             float radius = 0F;
 
@@ -182,8 +170,6 @@ namespace Referrals_project
 
             return new MyOrientedBoundingBoxD(First, grids[0].PositionAndOrientation.Value.GetMatrix());
         }
-
-
         private bool UpdateGridsPosition(Vector3D newPosition)
         {
 
@@ -222,7 +208,6 @@ namespace Referrals_project
             });
             return true;
         }
-
         public void Increment(IMyEntity entity)
         {
             var grid = (IMyCubeGrid)entity;
@@ -240,11 +225,7 @@ namespace Referrals_project
 
         }
 
-
-
-        /*  Align to gravity code.
-         * 
-         * 
+        /*  Align to gravity code.         
          */
 
         private void EnableRequiredItemsOnLoad(MyObjectBuilder_CubeGrid[] _grid)
@@ -276,10 +257,7 @@ namespace Referrals_project
 
                 _grid[i].DampenersEnabled = true;
             }
-
         }
-
-
         private void CalculateGridPosition(Vector3D Target)
         {
 
@@ -287,12 +265,9 @@ namespace Referrals_project
             List<MyObjectBuilder_Cockpit> cockpits = new List<MyObjectBuilder_Cockpit>();
             Vector3D forwardVector = Vector3D.Zero;
 
-
             Log.Debug("Total Grids to be pasted: " + _grids.Count());
 
             //Attempt to get gravity/Artificial gravity to align the grids to
-
-
             //Here you can adjust the offset from the surface and rotation.
             //Unfortunatley we move the grid again after this to find a free space around the character. Perhaps later i can incorporate that into
             //LordTylus's existing grid checkplament method
@@ -389,26 +364,17 @@ namespace Referrals_project
 
             MyObjectBuilder_CubeBlock referenceBlock = cockpits.Find(blk => blk.IsMainCockpit) ?? cockpits.FirstOrDefault();
 
-
-
-
             if (referenceBlock == null)
             {
                 var remoteControls = cubeGrid.CubeBlocks.OfType<MyObjectBuilder_RemoteControl>().ToList();
                 referenceBlock = remoteControls.Find(blk => blk.IsMainCockpit) ?? remoteControls.FirstOrDefault();
-
-
             }
 
             if (referenceBlock == null)
             {
                 referenceBlock = cubeGrid.CubeBlocks.OfType<MyObjectBuilder_LandingGear>().FirstOrDefault();
             }
-
-
-
-
-
+            
             if (referenceBlock != null)
             {
                 if (referenceBlock.BlockOrientation.Up == Base6Directions.Direction.Right)
@@ -422,14 +388,10 @@ namespace Referrals_project
                 else if (referenceBlock.BlockOrientation.Up == Base6Directions.Direction.Backward)
                     resultMatrix *= MatrixD.CreateFromAxisAngle(Vector3D.Left, MathHelper.ToRadians(90));
             }
-
-
-
+            
             return resultMatrix;
         }
     }
-
-
     public class Chat
     {
         private CommandContext _context;

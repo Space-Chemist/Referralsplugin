@@ -48,10 +48,8 @@ namespace Referrals_project
 
                             Vector3I? hit = cubeGrid.RayCastBlocks(startPosition, endPosition);
 
-                            if (hit.HasValue) {   
-                                
-                                
-
+                            if (hit.HasValue) 
+                            {
                                 double distance = (startPosition - cubeGrid.GridIntegerToWorld(hit.Value)).Length();
 
                                 if (list.TryGetValue(group, out double oldDistance)) {
@@ -80,7 +78,6 @@ namespace Referrals_project
             var item = list.OrderBy(f => f.Value).First();
             bag.Add(item.Key);
 
-            
             return bag;
         }
         

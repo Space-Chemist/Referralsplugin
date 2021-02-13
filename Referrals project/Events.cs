@@ -14,9 +14,6 @@ namespace Referrals_project
         {
             /*  This is just used to house some basic invokeongamethread calls. (Based off of Jimms code)
              */
-
-
-
             public static Task<T> InvokeAsync<T>(Func<T> action, [CallerMemberName] string caller = "")
             {
                 //Jimm thank you. This is the best
