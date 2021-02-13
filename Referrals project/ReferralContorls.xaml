@@ -27,6 +27,16 @@
             <CheckBox x:Name="ReferralRewardsEnabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=ReferralRewardsEnabled}"/>
         </StackPanel>
         
+        <StackPanel Grid.Column="" Grid.Row="1" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Give Money" Margin="5" />
+            <CheckBox x:Name="GiveMoney" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=GiveMoney}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Give Grid" Margin="5" />
+            <CheckBox x:Name="GiveGrid" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=GiveGrid}"/>
+        </StackPanel>
+        
         <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
             <TextBlock  VerticalAlignment="Center" Text="Promotion Rewards Enabled" Margin="5"/>
             <CheckBox x:Name="PromotionRewardEnabled" HorizontalAlignment="Left" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding PromotionRewardEnabled}"/>
@@ -54,6 +64,11 @@
         <StackPanel Grid.Column="2" Grid.Row="4" Orientation="Horizontal">
             <TextBlock  VerticalAlignment="Center" Text="Player Referral Grid" Margin="5"/>
             <TextBox x:Name="PlayerReferralGrid" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding PlayerReferralGrid}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="2" Grid.Row="4" Orientation="Horizontal">
+            <TextBlock  VerticalAlignment="Center" Text="Credit Amount" Margin="5"/>
+            <TextBox x:Name="CreditAmount" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding CreditAmount}"/>
         </StackPanel>
         
         <!--<StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="4">

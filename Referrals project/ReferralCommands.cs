@@ -21,7 +21,6 @@ namespace Referrals_project
     public class ReferralCommands : CommandModule
     {
         private static readonly Logger Log = LogManager.GetLogger("Referrals");
-        private MyCharacter myCharacter;
         public Referrals_project.ReferralCore Plugin
         {
             get { return (Referrals_project.ReferralCore) this.Context.Plugin; }
