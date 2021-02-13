@@ -146,26 +146,42 @@ namespace Referrals_project
         }
 
 
-        public static bool Dostuff(User user, IMyPlayer player)
+        public static bool Dostuff(User user, IMyPlayer player, bool promo)
         {
-            var folderDirectory = ReferralCore.Instance.StoragePath;
+            var folderDirectory = Instance.StoragePath;
             var myIdentity = ((MyPlayer) player).Identity;
             var targetIdentity = myIdentity.IdentityId;
             var myCharacter = myIdentity.Character;
+            if (Instance.Config.GiveMoney)
+            {
+                if (!FinancialService.GivePlayerCredits(targetIdentity, Instance.Config.CreditAmount))
+                {
+                    return false;
+                }
+            }
+
+            if (!Instance.Config.GiveGrid) return true;
+            if (promo)
+            {
+                var methods = new GridMethods(folderDirectory, Instance.Config.PromotionRewardsGrid);
+                return methods.LoadGrid( Instance.Config.PromotionRewardsGrid, myCharacter, targetIdentity);
+            }
+
             if (user.ReferralByUser != null)
             {
                 if ((bool) user.ReferralByUser)
                 {
-                    var methods = new GridMethods(folderDirectory, "GridName");
-                    return methods.LoadGrid("GridNme", myCharacter, targetIdentity);
+                    var methods = new GridMethods(folderDirectory, Instance.Config.PlayerReferralGrid);
+                    return methods.LoadGrid( Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity);
                 }
             }
 
             if (user.ReferralByCode == null) return false;
+
             {
                 if (!(bool) user.ReferralByCode) return false;
-                var methods = new GridMethods(folderDirectory, "GridName");
-                return methods.LoadGrid("GridNme", myCharacter, targetIdentity);
+                var methods = new GridMethods(folderDirectory,  Instance.Config.ServerReferralGrid);
+                return methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity);
             }
         }
 
