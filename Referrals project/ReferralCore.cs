@@ -146,58 +146,43 @@ namespace Referrals_project
         }
 
 
-        public static async Task<bool> Dostuff(User user, IMyPlayer player, bool promo)
+        public static bool Dostuff(User user, IMyPlayer player, bool promo)
         {
-            try
+            var folderDirectory = Instance.StoragePath;
+            var myIdentity = ((MyPlayer) player).Identity;
+            var targetIdentity = myIdentity.IdentityId;
+            var myCharacter = myIdentity.Character;
+            if (Instance.Config.GiveMoney)
             {
-                var folderDirectory = Instance.StoragePath;
-                var myIdentity = ((MyPlayer) player).Identity;
-                var targetIdentity = myIdentity.IdentityId;
-                var myCharacter = myIdentity.Character;
-                if (Instance.Config.GiveMoney)
+                if (!FinancialService.GivePlayerCredits(targetIdentity, Instance.Config.CreditAmount))
                 {
-                    if (!FinancialService.GivePlayerCredits(targetIdentity, Instance.Config.CreditAmount))
-                    {
-                        return false;
-                    }
-                }
-
-                if (!Instance.Config.GiveGrid) return true;
-                if (promo)
-                {
-                    var methods = new GridMethods(folderDirectory, Instance.Config.PromotionRewardsGrid);
-                    return methods.LoadGrid( Instance.Config.PromotionRewardsGrid, myCharacter, targetIdentity);
-                }
-
-                if (user.ReferralByUser != null)
-                {
-                    if ((bool) user.ReferralByUser)
-                    {
-                        var methods = new GridMethods(folderDirectory, Instance.Config.PlayerReferralGrid);
-                        //return methods.LoadGrid( Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity);
-                        Task T = new Task(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity));
-                        T.Start();
-                    }
-                }
-
-                if (user.ReferralByCode == null) return false;
-
-                {
-                    if (!(bool) user.ReferralByCode) return false;
-                    var methods = new GridMethods(folderDirectory,  Instance.Config.ServerReferralGrid);
-                    //return methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity);
-                    //GridMethods methods = new GridMethods(FolderDirectory, GridName);
-                    Task T = new Task(() => methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity));
-                    T.Start();
-                    await Task.FromResult(T);
+                    return false;
                 }
             }
-            catch (Exception e)
+
+            if (!Instance.Config.GiveGrid) return true;
+            if (promo)
             {
-                Log.Error("Do Stuff" + e);
+                var methods = new GridMethods(folderDirectory, Instance.Config.PromotionRewardsGrid);
+                return methods.LoadGrid( Instance.Config.PromotionRewardsGrid, myCharacter, targetIdentity).Result;
             }
 
-            return false; 
+            if (user.ReferralByUser != null)
+            {
+                if ((bool) user.ReferralByUser)
+                {
+                    var methods = new GridMethods(folderDirectory, Instance.Config.PlayerReferralGrid);
+                    return methods.LoadGrid( Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity).Result;
+                }
+            }
+
+            if (user.ReferralByCode == null) return false;
+
+            {
+                if (!(bool) user.ReferralByCode) return false;
+                var methods = new GridMethods(folderDirectory,  Instance.Config.ServerReferralGrid);
+                return methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity).Result;
+            }
         }
 
         //full credit to https://github.com/TorchAPI/Essentials/blob/415a7e12809c75fc1efcfbc878cfee1730efa6ff/Essentials/Utilities.cs#L56

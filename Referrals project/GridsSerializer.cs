@@ -66,7 +66,7 @@ namespace Referrals_project
         }
 
 
-        public bool LoadGrid(string GridName, MyCharacter Player, long TargetPlayerID)
+        public async Task<bool>  LoadGrid(string GridName, MyCharacter Player, long TargetPlayerID)
         {
             Log.Warn("LoadGrid ran");
 
