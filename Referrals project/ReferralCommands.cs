@@ -21,6 +21,7 @@ namespace Referrals_project
     public class ReferralCommands : CommandModule
     {
         private static readonly Logger Log = LogManager.GetLogger("Referrals");
+
         public Referrals_project.ReferralCore Plugin
         {
             get { return (Referrals_project.ReferralCore) this.Context.Plugin; }
@@ -39,7 +40,7 @@ namespace Referrals_project
         public void Load(string GridName)
         {
             var FolderDirectory = ReferralCore.Instance.StoragePath;
-            var myIdentity = ((MyPlayer)Context.Player).Identity;
+            var myIdentity = ((MyPlayer) Context.Player).Identity;
             var TargetIdentity = myIdentity.IdentityId;
             var myCharacter = myIdentity.Character;
 
@@ -47,7 +48,6 @@ namespace Referrals_project
             Task T = new Task(() => methods.LoadGrid(GridName, myCharacter, TargetIdentity));
             T.Start();
         }
-            
 
 
         [Command("rplayer", "get your referral bonus", "requries steamId/Name/")]
@@ -66,6 +66,7 @@ namespace Referrals_project
                 Context.Respond("X: player not found, are you sure you have the right steam id or name?");
                 return;
             }
+
             var user1 = ReferralCore.GetUser(Context.Player.SteamUserId);
             if (user1.ReferralByUser != null)
             {
@@ -75,6 +76,7 @@ namespace Referrals_project
                     return;
                 }
             }
+
             if (user1.ReferralByCode != null)
             {
                 if ((bool) user1.ReferralByCode)
@@ -83,6 +85,7 @@ namespace Referrals_project
                     return;
                 }
             }
+
             var user2 = ReferralCore.GetUser(MySession.Static.Players.TryGetSteamId(identity.IdentityId));
             var check = ReferralCore.Dostuff(user1, Context.Player, false);
             if (!check)
@@ -103,10 +106,8 @@ namespace Referrals_project
             ReferralCore.SaveUser(user2);
             Context.Respond("Claimed");
         }
-        
-        
-        
-        
+
+
         [Command("rcode", "get your referral bonus", "requries code")]
         [Permission(MyPromoteLevel.None)]
         public void Knew2(string code)
@@ -116,7 +117,7 @@ namespace Referrals_project
                 Log.Error("Why are you running this in the console?");
                 return;
             }
-            
+
             if (code != ReferralCore.Instance.Config.ServerReferralCode)
             {
                 Context.Respond("X: code not found, are you sure you have the right one?");
@@ -142,9 +143,9 @@ namespace Referrals_project
                     return;
                 }
             }
-            
+
             user.ReferralByCode = true;
-            
+
             var check = ReferralCore.Dostuff(user, Context.Player, false);
             if (!check)
             {
@@ -153,8 +154,8 @@ namespace Referrals_project
                 Context.Respond($"This should never happen, see a admin and report code 42");
                 return;
             }
-            
-            
+
+
             ReferralCore.SaveUser(user);
             Context.Respond("Claimed");
         }
@@ -187,13 +188,52 @@ namespace Referrals_project
                     else
                     {
                         //lmao
-                        Context.Respond($"Failed to Claim for {rd.ReferredUserName}, This should never happen, see a admin and report code 42");
+                        Context.Respond(
+                            $"Failed to Claim for {rd.ReferredUserName}, This should never happen, see a admin and report code 42");
                     }
                 }
             );
             Context.Respond("done.");
-
         }
 
+
+        [Command("promo", "Get your promo bonus", "Get your promo bonus")]
+        [Permission(MyPromoteLevel.None)]
+        public void promo(string code)
+        {
+            if (Context.Player == null)
+            {
+                Log.Error("Why are you running this in the console?");
+                return;
+            }
+
+            if (code != ReferralCore.Instance.Config.PromotionRewardsCode)
+            {
+                Context.Respond("Bad code.");
+                return;
+            }
+
+            var user = ReferralCore.GetUser(Context.Player.SteamUserId);
+
+            if (user.PromoCodes.Any(userPromoCode => code == userPromoCode))
+            {
+                Context.Respond("you did this.");
+                return;
+            }
+
+            var check = ReferralCore.Dostuff(user, Context.Player, true);
+            if (!check)
+            {
+                Log.Error("Failed to do stuff");
+                Context.Respond("X: Failed to do stuff");
+                Context.Respond($"This should never happen, see a admin and report code 42");
+                return;
+            }
+
+            user.PromoCodes.Add(code);
+            user.PromoCodes = user.PromoCodes;
+            ReferralCore.SaveUser(user);
+            Context.Respond("done.");
+        }
     }
 }

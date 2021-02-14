@@ -119,7 +119,7 @@ namespace Referrals_project
                 ReferredBy = null,
                 ReferralCode = null,
                 ReferredDescriptions = new List<ReferredDescription>(),
-                PromoCodes = new List<PromoCode>()
+                PromoCodes = new List<string>()
             };
         }
 
@@ -168,7 +168,9 @@ namespace Referrals_project
                 if (promo)
                 {
                     var methods = new GridMethods(folderDirectory, Instance.Config.PromotionRewardsGrid);
-                    return methods.LoadGrid( Instance.Config.PromotionRewardsGrid, myCharacter, targetIdentity);
+                    var t = new Task( () => methods.LoadGrid( Instance.Config.PromotionRewardsGrid, myCharacter, targetIdentity));
+                    t.Start();
+                    return true;
                 }
 
                 if (user.ReferralByUser != null)
@@ -176,14 +178,10 @@ namespace Referrals_project
                     if ((bool) user.ReferralByUser)
                     {
                         var methods = new GridMethods(folderDirectory, Instance.Config.PlayerReferralGrid);
-                        //return methods.LoadGrid( Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity);
-                        Task T = new Task(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity));
+                        var T = new Task(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity));
                         T.Start();
-                        /*T.GetAwaiter();
-                        if (T.IsCompleted)
-                        {
-                            return true;
-                        }  */  
+                        return true;
+                        
                     }
                 }
 
@@ -191,19 +189,9 @@ namespace Referrals_project
                 {
                     if (!(bool) user.ReferralByCode) return false;
                     var methods = new GridMethods(folderDirectory,  Instance.Config.ServerReferralGrid);
-                    //return methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity);
-                    //GridMethods methods = new GridMethods(FolderDirectory, GridName);
-                    Task T = new Task(() => methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity));
+                    var T = new Task(() => methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity));
                     T.Start();
-                    /*Task.WaitAll(T);
-                    var me =Task.FromResult(T);
-                    var meResult = me.Result;
-                    if (meResult.IsCompleted)
-                    {
-                        */
-                        //return true;
-                    //}
-                     
+                    return true;
                 }
             }
             catch (Exception e)
