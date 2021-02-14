@@ -145,6 +145,8 @@ namespace Referrals_project
             }
         }
 
+        
+    
 
         public static bool Dostuff(User user, IMyPlayer player, bool promo)
         {
@@ -174,14 +176,9 @@ namespace Referrals_project
                     if ((bool) user.ReferralByUser)
                     {
                         var methods = new GridMethods(folderDirectory, Instance.Config.PlayerReferralGrid);
-                        //return methods.LoadGrid( Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity);
-                        Task T = new Task(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity));
-                        T.Start();
-                        T.GetAwaiter();
-                        if (T.IsCompleted)
-                        {
-                            return true;
-                        }    
+                        return new Task<bool>(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity)).Result;
+                       
+
                     }
                 }
 
@@ -190,15 +187,7 @@ namespace Referrals_project
                 {
                     if (!(bool) user.ReferralByCode) return false;
                     var methods = new GridMethods(folderDirectory,  Instance.Config.ServerReferralGrid);
-                    //return methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity);
-                    //GridMethods methods = new GridMethods(FolderDirectory, GridName);
-                    Task T = new Task(() => methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity));
-                    T.Start();
-                    Task.WaitAll(T);
-                    if (T.IsCompleted)
-                    {
-                        return true;
-                    }    
+                    return new Task<bool>(() => methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity)).Result;
                 }
             }
             catch (Exception e)
