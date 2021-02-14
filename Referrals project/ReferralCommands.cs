@@ -26,7 +26,7 @@ namespace Referrals_project
             get { return (Referrals_project.ReferralCore) this.Context.Plugin; }
         }
 
-        [Command("save", "Saves targeted grid in hangar")]
+        [Command("save", "Saves reward code")]
         [Permission(MyPromoteLevel.None)]
         public void Save()
         {
@@ -50,9 +50,9 @@ namespace Referrals_project
             
 
 
-        [Command("new", "get your referral bonus", "requries steamId/Name/")]
+        [Command("rplayer", "get your referral bonus", "requries steamId/Name/")]
         [Permission(MyPromoteLevel.None)]
-        public void Knew(string playerorcode)
+        public void Knew(string player)
         {
             if (Context.Player == null)
             {
@@ -60,7 +60,7 @@ namespace Referrals_project
                 return;
             }
 
-            var identity = ReferralCore.GetIdentityByNameOrIds(playerorcode);
+            var identity = ReferralCore.GetIdentityByNameOrIds(player);
             if (identity == null)
             {
                 Context.Respond("X: player not found, are you sure you have the right steam id or name?");
@@ -107,9 +107,9 @@ namespace Referrals_project
         
         
         
-        [Command("new2", "get your referral bonus", "requries code")]
+        [Command("rcode", "get your referral bonus", "requries code")]
         [Permission(MyPromoteLevel.None)]
-        public void Knew2(string playerorcode)
+        public void Knew2(string code)
         {
             if (Context.Player == null)
             {
@@ -117,7 +117,7 @@ namespace Referrals_project
                 return;
             }
             
-            if (playerorcode != ReferralCore.Instance.Config.ServerReferralCode)
+            if (code != ReferralCore.Instance.Config.ServerReferralCode)
             {
                 Context.Respond("X: code not found, are you sure you have the right one?");
                 return;
@@ -143,6 +143,8 @@ namespace Referrals_project
                 }
             }
             
+            user.ReferralByCode = true;
+            
             var check = ReferralCore.Dostuff(user, Context.Player, false);
             if (!check)
             {
@@ -152,7 +154,7 @@ namespace Referrals_project
                 return;
             }
             
-            user.ReferralByCode = true;
+            
             ReferralCore.SaveUser(user);
             Context.Respond("Claimed");
         }
