@@ -10,7 +10,7 @@ namespace Referrals_project
     }
 
 
-    public class User : ViewModel
+    public class User : ViewModel 
     {
         public string Name { get; set; }
         public bool? ReferralByUser { get; set; }

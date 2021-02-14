@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using NLog;
 using System.Xml.Serialization;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 using Sandbox.Game.Multiplayer;
 using Sandbox.Game.World;
 using Torch;
@@ -13,6 +16,7 @@ using Torch.API;
 using Torch.API.Managers;
 using Torch.API.Plugins;
 using Torch.API.Session;
+using Torch.Managers;
 using Torch.Session;
 using VRage.Game.ModAPI;
 
@@ -54,6 +58,12 @@ namespace Referrals_project
                     serializer.Serialize(fileWriter, userData);
                 }
             }
+            
+            var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
+            var map = new BsonClassMap<UserData>();
+            map.AutoMap();
+            BsonClassMap.RegisterClassMap(map);
+            
         }
 
         private static void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)
@@ -91,9 +101,14 @@ namespace Referrals_project
             _config = new Persistent<ReferralConfig>(configFile, new ReferralConfig());
             _config.Save();
         }
-
+        
+        
         public static UserData UserDataFromStorage()
         {
+            if (true)
+            {
+                
+            }
             var serializer = new XmlSerializer(typeof(UserData));
             using (var reader = new StreamReader(UserDataPath))
             {
@@ -168,9 +183,9 @@ namespace Referrals_project
                 if (promo)
                 {
                     var methods = new GridMethods(folderDirectory, Instance.Config.PromotionRewardsGrid);
-                    var t = new Task( () => methods.LoadGrid( Instance.Config.PromotionRewardsGrid, myCharacter, targetIdentity));
-                    t.Start();
-                    return true;
+                   
+                    var t = Task.Run( () => methods.LoadGrid( Instance.Config.PromotionRewardsGrid, myCharacter, targetIdentity));
+                    return t.Result;
                 }
 
                 if (user.ReferralByUser != null)
@@ -178,9 +193,9 @@ namespace Referrals_project
                     if ((bool) user.ReferralByUser)
                     {
                         var methods = new GridMethods(folderDirectory, Instance.Config.PlayerReferralGrid);
-                        var T = new Task(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity));
-                        T.Start();
-                        return true;
+                        
+                        var t = Task.Run(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity));
+                        return t.Result;
                         
                     }
                 }
@@ -189,9 +204,8 @@ namespace Referrals_project
                 {
                     if (!(bool) user.ReferralByCode) return false;
                     var methods = new GridMethods(folderDirectory,  Instance.Config.ServerReferralGrid);
-                    var T = new Task(() => methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity));
-                    T.Start();
-                    return true;
+                    var t = Task.Run(() => methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity));
+                    return t.Result;
                 }
             }
             catch (Exception e)
