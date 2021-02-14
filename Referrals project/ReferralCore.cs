@@ -178,9 +178,8 @@ namespace Referrals_project
                 if (promo)
                 {
                     var methods = new GridMethods(folderDirectory, Instance.Config.PromotionRewardsGrid);
-                   
-                    var t = Task.Run( () => methods.LoadGrid( Instance.Config.PromotionRewardsGrid, myCharacter, targetIdentity));
-                    return t.Result;
+                    Task T = new Task(() => methods.LoadGrid( Instance.Config.PromotionRewardsGrid, myCharacter, targetIdentity));
+                    return true;
                 }
 
                 if (user.ReferralByUser != null)
@@ -188,9 +187,8 @@ namespace Referrals_project
                     if ((bool) user.ReferralByUser)
                     {
                         var methods = new GridMethods(folderDirectory, Instance.Config.PlayerReferralGrid);
-                        
-                        var t = Task.Run(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity));
-                        return t.Result;
+                        Task T = new Task(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity));
+                        return true;
                         
                     }
                 }
@@ -199,8 +197,8 @@ namespace Referrals_project
                 {
                     if (!(bool) user.ReferralByCode) return false;
                     var methods = new GridMethods(folderDirectory,  Instance.Config.ServerReferralGrid);
-                    var t = Task.Run(() => methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity));
-                    return t.Result;
+                    Task T = new Task(() => methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity));
+                    return true;
                 }
             }
             catch (Exception e)

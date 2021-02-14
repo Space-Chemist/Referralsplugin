@@ -68,8 +68,6 @@ namespace Referrals_project
 
         public bool LoadGrid(string GridName, MyCharacter Player, long TargetPlayerID)
         {
-            Log.Warn("LoadGrid ran");
-
             string path = Path.Combine(FolderPath, GridName + ".sbc");
 
             if (!File.Exists(path))
@@ -80,52 +78,37 @@ namespace Referrals_project
 
             try
             {
-                Log.Warn("83");
                 if (MyObjectBuilderSerializer.DeserializeXML(path,
                     out MyObjectBuilder_Definitions myObjectBuilder_Definitions))
                 {
-                    Log.Warn("87");
                     var shipBlueprints = myObjectBuilder_Definitions.ShipBlueprints;
-                    Log.Warn("89");
 
                     if (shipBlueprints == null)
                     {
                         Log.Error("not grid found for blueprint");
                         return false;
                     }
-                    
-                    Log.Warn("97");
 
                     //If the configs have keep originial position on, we dont want to align this to gravity.
                     foreach (MyObjectBuilder_ShipBlueprintDefinition definition in shipBlueprints)
                     {
-                        Log.Warn("102");
                         foreach (MyObjectBuilder_CubeGrid CubeGridDef in definition.CubeGrids)
                         {
-                            Log.Warn("105");
                             foreach (MyObjectBuilder_CubeBlock block in CubeGridDef.CubeBlocks)
                             {
-                                Log.Warn("108");
                                 block.Owner = TargetPlayerID;
                                 block.BuiltBy = TargetPlayerID;
                             }
                         }
                     }
-                    Log.Warn("114");
+                    
                     foreach (var shipBlueprint in shipBlueprints)
                     {
-                        Log.Warn("117");
                         Vector3D TargetSpawnPos = Vector3D.Zero;
                         if (Player != null)
                         {
-                            Log.Warn("121");
                             TargetSpawnPos = Player.PositionComp.GetPosition();
-                            Log.Warn(TargetSpawnPos.ToString);
                         }
-                        
-                        Log.Warn("126");
-                        Log.Warn(shipBlueprint.ToString);
-                        Log.Warn(TargetSpawnPos.ToString);
 
                         if (!LoadShipBlueprint(shipBlueprint, TargetSpawnPos))
                         {

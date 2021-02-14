@@ -50,7 +50,7 @@ namespace Referrals_project
         }
 
 
-        [Command("rplayer", "get your referral bonus", "requries steamId/Name/")]
+        [Command("player", "get your referral bonus", "requires steamId/Name/")]
         [Permission(MyPromoteLevel.None)]
         public void Knew(string player)
         {
@@ -63,7 +63,7 @@ namespace Referrals_project
             var identity = ReferralCore.GetIdentityByNameOrIds(player);
             if (identity == null)
             {
-                Context.Respond("X: player not found, are you sure you have the right steam id or name?");
+                Context.Respond("player not found, are you sure you have the right steam id or name?");
                 return;
             }
 
@@ -72,7 +72,7 @@ namespace Referrals_project
             {
                 if ((bool) user1.ReferralByUser)
                 {
-                    Context.Respond("X: You already did this?");
+                    Context.Respond("Referral already claimed");
                     return;
                 }
             }
@@ -81,7 +81,7 @@ namespace Referrals_project
             {
                 if ((bool) user1.ReferralByCode)
                 {
-                    Context.Respond("X: You already did this?");
+                    Context.Respond("Referral already claimed");
                     return;
                 }
             }
@@ -91,7 +91,7 @@ namespace Referrals_project
             if (!check)
             {
                 Log.Error("Failed to do stuff");
-                Context.Respond("X: Failed to do stuff");
+                Context.Respond("Failed to do stuff");
                 Context.Respond($"This should never happen, see a admin and report code 42");
                 return;
             }
@@ -108,7 +108,7 @@ namespace Referrals_project
         }
 
 
-        [Command("rcode", "get your referral bonus", "requries code")]
+        [Command("code", "get your referral bonus", "requires code")]
         [Permission(MyPromoteLevel.None)]
         public void Knew2(string code)
         {
@@ -120,7 +120,7 @@ namespace Referrals_project
 
             if (code != ReferralCore.Instance.Config.ServerReferralCode)
             {
-                Context.Respond("X: code not found, are you sure you have the right one?");
+                Context.Respond("code not found, are you sure you have the right one?");
                 return;
             }
 
@@ -130,7 +130,7 @@ namespace Referrals_project
             {
                 if ((bool) user.ReferralByUser)
                 {
-                    Context.Respond("X: You already did this?");
+                    Context.Respond("Referral already claimed");
                     return;
                 }
             }
@@ -139,7 +139,7 @@ namespace Referrals_project
             {
                 if ((bool) user.ReferralByCode)
                 {
-                    Context.Respond("X: You already did this?");
+                    Context.Respond("Referral already claimed");
                     return;
                 }
             }
@@ -150,7 +150,7 @@ namespace Referrals_project
             if (!check)
             {
                 Log.Error("Failed to do stuff");
-                Context.Respond("X: Failed to do stuff");
+                Context.Respond("Failed to do stuff");
                 Context.Respond($"This should never happen, see a admin and report code 42");
                 return;
             }
@@ -209,7 +209,7 @@ namespace Referrals_project
 
             if (code != ReferralCore.Instance.Config.PromotionRewardsCode)
             {
-                Context.Respond("Bad code.");
+                Context.Respond("Incorrect Promotion Code.");
                 return;
             }
 
@@ -217,7 +217,7 @@ namespace Referrals_project
 
             if (user.PromoCodes.Any(userPromoCode => code == userPromoCode))
             {
-                Context.Respond("you did this.");
+                Context.Respond("Promotion Code already used");
                 return;
             }
 
@@ -225,7 +225,7 @@ namespace Referrals_project
             if (!check)
             {
                 Log.Error("Failed to do stuff");
-                Context.Respond("X: Failed to do stuff");
+                Context.Respond("Failed to do stuff");
                 Context.Respond($"This should never happen, see a admin and report code 42");
                 return;
             }
