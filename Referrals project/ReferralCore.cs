@@ -59,11 +59,6 @@ namespace Referrals_project
                 }
             }
             
-            var dbClient = new MongoClient("mongodb://127.0.0.1:27017");
-            var map = new BsonClassMap<UserData>();
-            map.AutoMap();
-            BsonClassMap.RegisterClassMap(map);
-            
         }
 
         private static void SessionManagerOnSessionStateChanged(ITorchSession session, TorchSessionState newstate)
