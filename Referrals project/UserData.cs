@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SharpDX;
 using Torch;
 
 namespace Referrals_project
@@ -18,10 +19,12 @@ namespace Referrals_project
         public ulong? ReferredBy { get; set; }
         public string ReferralCode { get; set; }
         public List<ReferredDescription> ReferredDescriptions { get; set; }
+        public List<PromoCode> PromoCodes { get; set; }
 
         public User()
         {
             ReferredDescriptions = new List<ReferredDescription>();
+            PromoCodes = new List<PromoCode>();
         }
         
     }
@@ -34,5 +37,11 @@ namespace Referrals_project
 
         public bool Claimed { get; set; }
     }
+
+    public class PromoCode : ViewModel
+    {
+        public string UsedPromoCode { get; set; } 
+        
+    }    
 
 }
