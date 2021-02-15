@@ -70,6 +70,7 @@ namespace Referrals_project
             if (identity == Context.Player.Identity)
             {
                 Context.Respond("Dont try to claim yourself");
+                Log.Warn($"player tried to CHEAT Referral {Context.Player.DisplayName} CODE 42");
                 return;
             }    
 
