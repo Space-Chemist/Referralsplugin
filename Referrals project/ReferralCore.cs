@@ -179,6 +179,7 @@ namespace Referrals_project
                 {
                     var methods = new GridMethods(folderDirectory, Instance.Config.PromotionRewardsGrid);
                     Task T = new Task(() => methods.LoadGrid( Instance.Config.PromotionRewardsGrid, myCharacter, targetIdentity));
+                    T.Start();
                     return true;
                 }
 
@@ -188,6 +189,7 @@ namespace Referrals_project
                     {
                         var methods = new GridMethods(folderDirectory, Instance.Config.PlayerReferralGrid);
                         Task T = new Task(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity));
+                        T.Start();
                         return true;
                         
                     }
@@ -198,6 +200,7 @@ namespace Referrals_project
                     if (!(bool) user.ReferralByCode) return false;
                     var methods = new GridMethods(folderDirectory,  Instance.Config.ServerReferralGrid);
                     Task T = new Task(() => methods.LoadGrid(Instance.Config.ServerReferralGrid, myCharacter, targetIdentity));
+                    T.Start();
                     return true;
                 }
             }
