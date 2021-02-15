@@ -158,7 +158,7 @@ namespace Referrals_project
         }
 
 
-        public static bool Dostuff(User user, IMyPlayer player, bool promo)
+        public static bool Dostuff(User user, IMyPlayer player, bool promo, bool claimed)
         {
             try
             {
@@ -175,6 +175,16 @@ namespace Referrals_project
                 }
 
                 if (!Instance.Config.GiveGrid) return true;
+                
+                if (claimed)
+                {
+                    var methods = new GridMethods(folderDirectory, Instance.Config.PlayerReferralGrid);
+                    Task T = new Task(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity));
+                    T.Start();
+                    return true;
+                }
+                    
+                    
                 if (promo)
                 {
                     var methods = new GridMethods(folderDirectory, Instance.Config.PromotionRewardsGrid);
