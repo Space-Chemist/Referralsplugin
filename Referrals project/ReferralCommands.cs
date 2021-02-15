@@ -28,7 +28,7 @@ namespace Referrals_project
         }
 
         [Command("save", "Saves reward code")]
-        [Permission(MyPromoteLevel.None)]
+        [Permission(MyPromoteLevel.Admin)]
         public void Save()
         {
             var controlledEntity = Context.Player.Character;
@@ -36,7 +36,7 @@ namespace Referrals_project
         }
 
         [Command("testload", "Loads reward grid to ensure proper save")]
-        [Permission(MyPromoteLevel.None)]
+        [Permission(MyPromoteLevel.Admin)]
         public void Load(string GridName)
         {
             var FolderDirectory = ReferralCore.Instance.StoragePath;
@@ -66,6 +66,12 @@ namespace Referrals_project
                 Context.Respond("player not found, are you sure you have the right steam id or name?");
                 return;
             }
+
+            if (identity == Context.Player.Identity)
+            {
+                Context.Respond("Dont try to claim yourself");
+                return;
+            }    
 
             var user1 = ReferralCore.GetUser(Context.Player.SteamUserId);
             if (user1.ReferralByUser != null)
