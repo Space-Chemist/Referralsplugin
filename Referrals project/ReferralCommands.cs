@@ -33,6 +33,7 @@ namespace Referrals_project
         {
             var controlledEntity = Context.Player.Character;
             var result = Utilities.GetShip(controlledEntity);
+            Context.Respond("Grid Saved");
         }
 
         [Command("testload", "Loads reward grid to ensure proper save")]
@@ -92,6 +93,8 @@ namespace Referrals_project
                     return;
                 }
             }
+
+            user1.ReferralByUser = true;
 
             var user2 = ReferralCore.GetUser(MySession.Static.Players.TryGetSteamId(identity.IdentityId));
             var check = ReferralCore.Dostuff(user1, Context.Player, false);

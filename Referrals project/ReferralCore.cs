@@ -191,7 +191,6 @@ namespace Referrals_project
                         Task T = new Task(() => methods.LoadGrid(Instance.Config.PlayerReferralGrid, myCharacter, targetIdentity));
                         T.Start();
                         return true;
-                        
                     }
                 }
 
