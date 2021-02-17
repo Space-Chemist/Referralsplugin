@@ -165,7 +165,7 @@ namespace Referrals_project
             {
                 //Need To check grid name
 
-                string GridSavePath = Path.Combine(FolderPath, GridName + ".sbc");
+                string GridSavePath = Path.Combine(FolderPath + @"\ReferralData", GridName + ".sbc");
 
                 //Log.Info("SavedDir: " + pathForPlayer);
                 bool saved = SaveGridToFile(GridSavePath, GridName, objectBuilders);
