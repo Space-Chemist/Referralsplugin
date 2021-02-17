@@ -25,6 +25,9 @@ namespace Referrals_project
 {
     public class GridMethods
     {
+        //ToDo add Nexus support
+        //ToDo add Database support
+        //ToDo finish UI and get all features working 
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
         public string FolderPath;
@@ -33,7 +36,7 @@ namespace Referrals_project
 
         public GridMethods(string FolderDirectory, string GridName) 
         {
-            FolderPath = Path.Combine(FolderDirectory, GridName.ToString());
+            FolderPath = Path.Combine(FolderDirectory + @"\ReferralData", GridName.ToString());
             Directory.CreateDirectory(FolderPath);
         }
 
@@ -68,7 +71,7 @@ namespace Referrals_project
 
         public bool LoadGrid(string GridName, MyCharacter Player, long TargetPlayerID)
         {
-            string path = Path.Combine(FolderPath, GridName + ".sbc");
+            string path = Path.Combine(FolderPath + @"\ReferralData", GridName + ".sbc");
 
             if (!File.Exists(path))
             {

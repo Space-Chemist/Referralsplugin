@@ -47,7 +47,9 @@ namespace Referrals_project
             SessionManager = Torch.Managers.GetManager<TorchSessionManager>();
             SessionManager.SessionStateChanged += SessionManagerOnSessionStateChanged;
             SetupConfig();
-            UserDataPath = Path.Combine(StoragePath, "Users.xml");
+            string pathString = System.IO.Path.Combine(StoragePath, "ReferralData");
+            System.IO.Directory.CreateDirectory(pathString);
+            UserDataPath = Path.Combine(StoragePath + @"\ReferralData", "Users.xml");
             if (!File.Exists(UserDataPath))
             {
                 var serializer = new XmlSerializer(typeof(UserData));
