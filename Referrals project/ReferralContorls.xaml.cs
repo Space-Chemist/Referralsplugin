@@ -18,6 +18,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using Caliburn.Micro;
+using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game.GameSystems;
 
 
@@ -40,7 +41,6 @@ namespace Referrals_project
             ObservableCollection<User> userInfo = new ObservableCollection<User>(userData);
             //MyTreeView.DataContext = userInfo;
             Info.DataContext = userInfo;
-            
         }
         private Referrals_project.ReferralCore Plugin { get; }
     }

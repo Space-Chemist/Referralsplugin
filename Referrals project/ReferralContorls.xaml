@@ -105,7 +105,7 @@
                     <!--<TreeView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" x:Name="MyTreeView" ItemsSource="{Binding}" >
                         <TextBox Text="{Binding Name}"/>
                     </TreeView>-->
-                    <DataGrid Grid.Column="1" Grid.Row="0" x:Name="Info" ItemsSource="{Binding}" AlternatingRowBackground = "LightGray" AutoGenerateColumns="False" AlternationCount = "2">
+                    <DataGrid Grid.Column="1" Grid.Row="0" x:Name="Info" ItemsSource="{Binding userInfo }" AlternatingRowBackground = "LightGray" AutoGenerateColumns="False" AlternationCount = "2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Player Name" Binding="{Binding  Path=Name}"/>
                             <DataGridCheckBoxColumn Header="Referred By Player" Binding="{Binding Path=ReferralByUser, FallbackValue='N/A'}"/>
@@ -113,8 +113,50 @@
                             <DataGridTextColumn Header="Player Steam Id" Binding="{Binding Path=SteamId}"/>
                             <DataGridTextColumn Header="Referred By" Binding="{Binding Path=ReferredBy, FallbackValue='N/A'}" />
                             <DataGridTextColumn Header="Referral Code" Binding="{Binding Path=ReferralCod, FallbackValue='N/A'}"/>
-                        </DataGrid.Columns>
+                            <DataGridComboBoxColumn Header="Promo Code" TextBinding="{Binding Path=PromoCodes, FallbackValue='fuck'}"/>
+                        </DataGrid.Columns>    
                     </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Network/Nexus">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <!-- reorganize and make sure strings are not empty-->
+                    <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Nexus Support Enabled" Margin="5" />
+                        <CheckBox x:Name="NexusEnabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=NexusEnabled}"/>
+                    </StackPanel>
+        
+                    <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock  VerticalAlignment="Center" Text="Database Support Enabled" Margin="5"/>
+                        <CheckBox x:Name="DatabaseEnabled" HorizontalAlignment="Left" Grid.ColumnSpan="1" Margin="5" IsChecked="{Binding DataBaseEnabled}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
+                        <TextBlock  VerticalAlignment="Center" Text="Connection Url" Margin="5"/>
+                        <TextBox x:Name="ConnectionUrl" MinWidth="120" MaxWidth="120"  VerticalAlignment="Stretch" Margin="5" Text="{Binding ConnectionUrl}"/>
+                    </StackPanel>
+        
+                    <StackPanel Grid.Column="0" Grid.Row="4" Orientation="vertical">
+                        <TextBlock  VerticalAlignment="Center" Text="Database Options" Margin="5"/>
+                        <ComboBox x:Name="DataCombo" Text="{Binding Path=DatabaseType}" MinWidth="120" MaxWidth="120">
+                            <ComboBoxItem Content="Mongo"></ComboBoxItem>  
+                            <ComboBoxItem Content="PostgreSQL"></ComboBoxItem>  
+                            <ComboBoxItem Content="MySQL"></ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>

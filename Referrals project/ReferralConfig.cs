@@ -9,13 +9,17 @@ namespace Referrals_project
         private bool _promotionrewardenabled = true;
         private bool _givemoney = true;
         private bool _givegrid = true;
+        private bool _nexusenabled = false;
+        private bool _databaseenabled = false;
         private int _creditamount = 1000;
         private string _serverreferralcode = "testcode";
         private string _promotionrewardscode = "Promotiontestcode";
         private string _serverreferralgrid = "Grid Name";
         private string _promotionrewardsgrid = "Grid Name";
         private string _playerreferralgrid = "Grid Name";
-
+        private string _connectionurl = "url";
+        private string _databasetype = "";
+        
         public bool ReferralRewardsEnabled
         {
             get => _referralrewards;
@@ -31,6 +35,18 @@ namespace Referrals_project
         {
             get => _givemoney;
             set => SetValue(ref _givemoney, value);
+        }
+        
+        public bool NexusEnabled
+        {
+            get => _nexusenabled;
+            set => SetValue(ref _nexusenabled, value);
+        }
+        
+        public bool DataBaseEnabled
+        {
+            get => _databaseenabled;
+            set => SetValue(ref _databaseenabled, value);
         }
         
         public bool GiveGrid
@@ -73,6 +89,18 @@ namespace Referrals_project
         {
             get => _playerreferralgrid;
             set => SetValue(ref _playerreferralgrid, value);
+        }
+        
+        public string ConnectionUrl
+        {
+            get => _connectionurl;
+            set => SetValue(ref _connectionurl, value);
+        }
+        
+        public string DataBaseType
+        {
+            get => _databasetype;
+            set => SetValue(ref _databasetype, value);
         }
     }
 }
