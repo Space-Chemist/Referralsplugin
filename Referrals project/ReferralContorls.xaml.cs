@@ -38,10 +38,23 @@ namespace Referrals_project
             Plugin = plugin;
             DataContext = plugin.Config;
             var userData = ReferralCore.UserDataFromStorage().Users;
-            ObservableCollection<User> userInfo = new ObservableCollection<User>(userData);
             //MyTreeView.DataContext = userInfo;
-            Info.DataContext = userInfo;
+            Box.ItemsSource = userData;
         }
         private Referrals_project.ReferralCore Plugin { get; }
+
+        private void Box_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        { 
+            User SelectedUser = (User)Box.SelectedItem;
+            
+            if (SelectedUser == null)
+                return;
+
+            Info.DataContext = SelectedUser;
+
+
+
+
+        }
     }
 }

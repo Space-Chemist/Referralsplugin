@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using SharpDX;
 using Torch;
+using VRage.Collections;
 
 namespace Referrals_project
 {
     public class UserData : ViewModel
     {
-        public List<User> Users { get; set; }
+        public ObservableCollection<User> Users { get; set; }
     }
 
 
@@ -18,12 +19,12 @@ namespace Referrals_project
         public ulong SteamId { get; set; }
         public ulong? ReferredBy { get; set; }
         public string ReferralCode { get; set; }
-        public List<ReferredDescription> ReferredDescriptions { get; set; }
-        public List<string> PromoCodes { get; set; }
+        public ObservableCollection<ReferredDescription> ReferredDescriptions { get; set; }
+        public ObservableCollection<string> PromoCodes { get; set; }
 
         public User()
         {
-            ReferredDescriptions = new List<ReferredDescription>();
+            ReferredDescriptions = new ObservableCollection<ReferredDescription>();
         }
         
     }

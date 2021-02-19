@@ -18,6 +18,7 @@ using Torch.API.Plugins;
 using Torch.API.Session;
 using Torch.Managers;
 using Torch.Session;
+using VRage.Collections;
 using VRage.Game.ModAPI;
 
 
@@ -53,7 +54,7 @@ namespace Referrals_project
             if (!File.Exists(UserDataPath))
             {
                 var serializer = new XmlSerializer(typeof(UserData));
-                var userData = new UserData {Users = new List<User>()};
+                var userData = new UserData {Users = new ObservableCollection<User>()};
                 using (var fileWriter = new FileStream(UserDataPath, FileMode.OpenOrCreate, FileAccess.ReadWrite,
                     FileShare.ReadWrite))
                 {
@@ -119,7 +120,7 @@ namespace Referrals_project
             var userData = UserDataFromStorage().Users;
             if (userData.Any(user => user.SteamId == steamId))
             {
-                return userData.Find(user => user.SteamId == steamId);
+                return userData.FirstOrDefault(x => x.SteamId == steamId);
             }
 
             return new User()
@@ -130,8 +131,8 @@ namespace Referrals_project
                 SteamId = steamId,
                 ReferredBy = null,
                 ReferralCode = null,
-                ReferredDescriptions = new List<ReferredDescription>(),
-                PromoCodes = new List<string>()
+                ReferredDescriptions = new ObservableCollection<ReferredDescription>(),
+                PromoCodes = new ObservableCollection<string>()
             };
         }
 

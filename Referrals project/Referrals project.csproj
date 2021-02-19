@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>C:\Torch\Plugins\ReferralTestPlugin</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -310,11 +310,11 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Torch, Version=1.3.1.138, Culture=neutral, PublicKeyToken=null">
-      <HintPath>bin\Debug\Torch.dll</HintPath>
+    <Reference Include="Torch, Version=1.3.1.144, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\..\..\..\Torch\Torch.dll</HintPath>
     </Reference>
-    <Reference Include="Torch.API, Version=1.3.1.138, Culture=neutral, PublicKeyToken=null">
-      <HintPath>bin\Debug\Torch.API.dll</HintPath>
+    <Reference Include="Torch.API, Version=1.3.1.144, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\..\..\..\Torch\Torch.API.dll</HintPath>
     </Reference>
     <Reference Include="Torch.Server, Version=1.3.1.138, Culture=neutral, PublicKeyToken=null">
       <HintPath>bin\Debug\Torch.Server.exe</HintPath>
@@ -345,6 +345,7 @@
     </Reference>
     <Reference Include="VRage.Math, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\..\..\..\Torch\DedicatedServer64\VRage.Math.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRage.Math.XmlSerializers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>bin\Debug\VRage.Math.XmlSerializers.dll</HintPath>

@@ -1,5 +1,7 @@
 ﻿using System.Windows.Documents;
+using System.Xml.Serialization;
 using Torch;
+using VRage.Collections;
 
 namespace Referrals_project
 {
@@ -103,4 +105,5 @@ namespace Referrals_project
             set => SetValue(ref _databasetype, value);
         }
     }
+
 }

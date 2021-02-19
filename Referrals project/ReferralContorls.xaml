@@ -102,20 +102,26 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <!--<TreeView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" x:Name="MyTreeView" ItemsSource="{Binding}" >
-                        <TextBox Text="{Binding Name}"/>
-                    </TreeView>-->
-                    <DataGrid Grid.Column="1" Grid.Row="0" x:Name="Info" ItemsSource="{Binding userInfo }" AlternatingRowBackground = "LightGray" AutoGenerateColumns="False" AlternationCount = "2">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Player Name" Binding="{Binding  Path=Name}"/>
-                            <DataGridCheckBoxColumn Header="Referred By Player" Binding="{Binding Path=ReferralByUser, FallbackValue='N/A'}"/>
-                            <DataGridCheckBoxColumn Header="Referred By Code" Binding="{Binding Path=ReferralByCode, FallbackValue='N/A'}"/>
-                            <DataGridTextColumn Header="Player Steam Id" Binding="{Binding Path=SteamId}"/>
-                            <DataGridTextColumn Header="Referred By" Binding="{Binding Path=ReferredBy, FallbackValue='N/A'}" />
-                            <DataGridTextColumn Header="Referral Code" Binding="{Binding Path=ReferralCod, FallbackValue='N/A'}"/>
-                            <DataGridComboBoxColumn Header="Promo Code" TextBinding="{Binding Path=PromoCodes, FallbackValue='fuck'}"/>
-                        </DataGrid.Columns>    
-                    </DataGrid>
+                    <ListBox Grid.Row="0" Grid.Column="0" x:Name="Box" DisplayMemberPath="Name" SelectionChanged="Box_OnSelectionChanged" SelectionMode="Single">
+                        
+                    </ListBox>
+                    <Grid Grid.Row="0" Grid.Column="1" x:Name="Info">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                    <DataGrid Grid.Column="1" Grid.Row="0" ItemsSource="{Binding ReferredDescriptions}" AlternatingRowBackground = "LightGray" AutoGenerateColumns="False" AlternationCount = "2">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ReferredUserName" Binding="{Binding  Path=ReferredUserName, Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="ReferredUserId" Binding="{Binding Path=ReferredUserId, FallbackValue='N/A', Mode=TwoWay}"/>
+                                <DataGridCheckBoxColumn Header="Claimed" Binding="{Binding Path=Claimed, FallbackValue='N/A', Mode=TwoWay}"/>
+                            </DataGrid.Columns>    
+                        </DataGrid>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Network/Nexus">
