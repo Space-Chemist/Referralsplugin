@@ -40,7 +40,6 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <!-- reorganize and make sure strings are not empty-->
                     <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Referral Rewards Enabled" Margin="5" />
                     <CheckBox x:Name="ReferralRewardsEnabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=ReferralRewardsEnabled}"/>
@@ -102,7 +101,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ListBox Grid.Row="0" Grid.Column="0" x:Name="Box" DisplayMemberPath="Name" SelectionChanged="Box_OnSelectionChanged" SelectionMode="Single">
+                    <ListBox Grid.Row="0" Grid.Column="0" x:Name="Box" DisplayMemberPath="Name" SelectionChanged="Box_OnSelectionChanged" MinHeight="300" MinWidth="120" SelectionMode="Single">
                         
                     </ListBox>
                     <Grid Grid.Row="0" Grid.Column="1" x:Name="Info">
@@ -113,12 +112,43 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                    <DataGrid Grid.Column="1" Grid.Row="0" ItemsSource="{Binding ReferredDescriptions}" AlternatingRowBackground = "LightGray" AutoGenerateColumns="False" AlternationCount = "2">
+                        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Text="ReferralByUser" Margin="5"/>
+                            <CheckBox x:Name="BReferralByUser" MinWidth="120" MaxWidth="120" MaxHeight="20"  VerticalAlignment="Stretch" Margin="5" IsChecked="{Binding ReferralByUser, Mode=OneWay}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Text="ReferralByCode" Margin="5"/>
+                            <CheckBox x:Name="BReferralByCode" MinWidth="120" MaxWidth="120" MaxHeight="20" VerticalAlignment="Stretch" Margin="5" IsChecked="{Binding ReferralByCode, Mode=OneWay}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Text="SteamId" Margin="5"/>
+                            <TextBox x:Name="BSteamId" MinWidth="120" MaxWidth="120" MaxHeight="20" VerticalAlignment="Stretch" Margin="5" Text="{Binding SteamId, Mode=OneWay}" IsReadOnly="True"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Text="ReferredBy" Margin="5"/>
+                            <TextBox x:Name="BReferredBy" MinWidth="120" MaxWidth="120" MaxHeight="20" VerticalAlignment="Stretch" Margin="5" Text="{Binding ReferredBy, Mode=OneWay}" IsReadOnly="True"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="0" Grid.Row="4" Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Text="ReferralCode" Margin="5"/>
+                            <TextBox x:Name="BReferralCode" MinWidth="120" MaxWidth="120" MaxHeight="20" VerticalAlignment="Stretch" Margin="5" Text="{Binding ReferralCode, Mode=OneWay}" IsReadOnly="True"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="0" Grid.Row="5" Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Text="Promo Codes" Margin="5"/>
+                            <ListBox x:Name="BPromoCodes" MinWidth="120" MaxWidth="120" MaxHeight="20" VerticalAlignment="Stretch" Margin="5" DisplayMemberPath="{Binding PromoCodes, Mode=OneWay}" SelectionMode="Single"/>
+                        </StackPanel>
+                        
+                        <DataGrid Grid.Column="0" Grid.Row="6" ItemsSource="{Binding ReferredDescriptions}" AlternatingRowBackground = "LightGray" AutoGenerateColumns="False" AlternationCount = "2">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="ReferredUserName" Binding="{Binding  Path=ReferredUserName, Mode=TwoWay}"/>
-                                <DataGridTextColumn Header="ReferredUserId" Binding="{Binding Path=ReferredUserId, FallbackValue='N/A', Mode=TwoWay}"/>
-                                <DataGridCheckBoxColumn Header="Claimed" Binding="{Binding Path=Claimed, FallbackValue='N/A', Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="ReferredUserName" Binding="{Binding  Path=ReferredUserName, Mode=TwoWay}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="ReferredUserId" Binding="{Binding Path=ReferredUserId, FallbackValue='N/A', Mode=TwoWay}" IsReadOnly="True"/>
+                                <DataGridCheckBoxColumn Header="Claimed" Binding="{Binding Path=Claimed, FallbackValue='N/A', Mode=TwoWay}" IsReadOnly="True"/>
                             </DataGrid.Columns>    
                         </DataGrid>
                     </Grid>
