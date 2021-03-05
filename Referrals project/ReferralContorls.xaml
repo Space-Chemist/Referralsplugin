@@ -141,7 +141,7 @@
                         </StackPanel>
                         <StackPanel Grid.Column="0" Grid.Row="5" Orientation="Horizontal">
                             <TextBlock  VerticalAlignment="Center" Text="Promo Codes" Margin="5"/>
-                            <ListBox x:Name="BPromoCodes" MinWidth="120" MaxWidth="120" MaxHeight="20" VerticalAlignment="Stretch" Margin="5" DisplayMemberPath="{Binding PromoCodes, Mode=OneWay}" SelectionMode="Single"/>
+                            <ListBox x:Name="BPromoCodes" MinWidth="120" MaxWidth="120" MaxHeight="20" VerticalAlignment="Stretch" Margin="5" ItemsSource="{Binding PromoCodes, Mode=TwoWay}" SelectionMode="Single"/>
                         </StackPanel>
                         
                         <DataGrid Grid.Column="0" Grid.Row="6" ItemsSource="{Binding ReferredDescriptions}" AlternatingRowBackground = "LightGray" AutoGenerateColumns="False" AlternationCount = "2">
